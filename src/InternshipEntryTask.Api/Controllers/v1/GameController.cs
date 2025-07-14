@@ -14,7 +14,7 @@ namespace InternshipEntryTask.Api.Controllers.v1;
 public class GameController(IGameService gameService) : ControllerBase
 {
     /// <summary>
-    /// Получает игру по идентификатору 
+    /// Получает игру по идентификатору
     /// </summary>
     /// <param name="gameId">Идентификатор игры</param>
     /// <param name="showBoard">Флаг показывать доску или нет</param>
@@ -42,7 +42,6 @@ public class GameController(IGameService gameService) : ControllerBase
 
         return Results.Ok(result);
     }
-
 
     /// <summary>
     /// Присоединиться к игре
@@ -74,7 +73,7 @@ public class GameController(IGameService gameService) : ControllerBase
         [FromHeader(Name = "Show-Board")] bool showBoard)
     {
         GameDto result = await gameService.MoveAsync(moveRequest, accessKey, showBoard);
-        
+
         return Results.Ok(result);
     }
 }
