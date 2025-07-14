@@ -8,4 +8,6 @@ public class EnviromentConstants
     public const string GAME_WINLENGTH_NAME = "WinLength";
     public const string CONNECTION_STRING_SECTION = "ConnectionStrings";
     public const string DEFAULT_CONNECTION_STRING = "PostgreSqlConnection";
+    public const string CACHE_SECTION = "Cache";
+    public const string CACHE_TTL = "Ttl";
 }

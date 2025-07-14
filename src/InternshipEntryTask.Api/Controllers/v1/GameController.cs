@@ -1,4 +1,5 @@
-﻿using InternshipEntryTask.Core.Data.Game;
+﻿using Microsoft.AspNetCore.Mvc.ApiExplorer;
+using InternshipEntryTask.Core.Data.Game;
 using InternshipEntryTask.Core.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
@@ -9,9 +10,11 @@ namespace InternshipEntryTask.Api.Controllers.v1;
 /// Контроллер для обработки запросов игры
 /// </summary>
 /// <param name="gameService"><inheritdoc cref="IGameService"/></param>
+/// <param name="etagService"><inheritdoc cref="IETagService"/></param>
 [ApiController]
-[Route("/games")]
-public class GameController(IGameService gameService) : ControllerBase
+[ApiVersion("1.0")]
+[Route("v{version:apiVersion}/games")]
+public class GameController(IGameService gameService, IETagService etagService) : ControllerBase
 {
     /// <summary>
     /// Получает игру по идентификатору
@@ -62,18 +65,27 @@ public class GameController(IGameService gameService) : ControllerBase
     /// Сделать ход
     /// </summary>
     /// <param name="moveRequest">Запрос на создание хода <see cref="MoveRequest"/></param>
+    /// <param name="gameId">Идентификатор игры</param>
     /// <param name="accessKey">Ключ авторизации</param>
     /// <param name="showBoard">Флаг, показывать доску или нет</param>
     /// <returns>Объект игры <see cref="GameDto"/></returns>
-    [HttpPost("move")]
+    [HttpPost("{gameId:long}/move")]
     [ProducesResponseType(typeof(GameDto), (int)HttpStatusCode.OK)]
     public async Task<IResult> Move(
         [FromBody] MoveRequest moveRequest,
+        [FromRoute] long gameId,
         [FromHeader(Name = "X-Access-Key")] Guid accessKey,
         [FromHeader(Name = "Show-Board")] bool showBoard)
     {
-        GameDto result = await gameService.MoveAsync(moveRequest, accessKey, showBoard);
+        if (etagService.Check(gameId, moveRequest, out var etag))
+        {
+            Response.Headers.ETag = etag;
+            return Results.Ok();
+        }
 
+        var result = await gameService.MoveAsync(gameId, moveRequest, accessKey, showBoard);
+
+        Response.Headers.ETag = etagService.GetETag(gameId);
         return Results.Ok(result);
     }
 }

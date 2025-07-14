@@ -13,4 +13,5 @@ public class MessagesConstants
     public const string MOVE_ALREADY_EXISTS_MESSAGE_FORMAT_ERROR_MESSAGE = "Ход ({0}, {1}) уже существует";
     public const string PLAYER_X_ALREADY_EXISTS_MESSAGE = "Игрок Х уже существует";
     public const string PLAYER_O_ALREADY_EXISTS_MESSAGE = "Игрок O уже существует";
+    public const string E_TAG_NOTFOUND_ERROR_MESSAGE_FORMAT = "Не удалось получить значение по ключу {0}";
 }

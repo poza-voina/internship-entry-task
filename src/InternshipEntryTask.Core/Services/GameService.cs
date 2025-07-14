@@ -14,7 +14,13 @@ using System.ComponentModel;
 
 namespace InternshipEntryTask.Core.Services;
 
-public class GameService(IRepository<GameModel> gameRepository, IRepository<MoveModel> moveRepository, IConfiguration configuration, IGameBoardEvaluatorFactory gameBoardFactory) : IGameService
+public class GameService(
+    IRepository<GameModel> gameRepository,
+    IRepository<MoveModel> moveRepository,
+    IETagService etagService,
+    IConfiguration configuration,
+    IGameBoardEvaluatorFactory gameBoardFactory)
+    : IGameService
 {
     private GameSettings GameSettings =>  
         configuration.GetRequiredSection(EnviromentConstants.GAME_SECTION_NAME)
@@ -89,12 +95,12 @@ public class GameService(IRepository<GameModel> gameRepository, IRepository<Move
             .WithAccessKey(accessKey);
     }
 
-    public async Task<GameDto> MoveAsync(MoveRequest moveRequest, Guid accessKey, bool showBoard)
+    public async Task<GameDto> MoveAsync(long gameId, MoveRequest moveRequest, Guid accessKey, bool showBoard)
     {
         var winLength = configuration.GetRequiredSection(EnviromentConstants.GAME_SECTION_NAME)
             .GetRequiredValue<int>(EnviromentConstants.GAME_WINLENGTH_NAME);
 
-        var gameModel = await GetGameByAccessKeyAsync(accessKey);
+        var gameModel = await GetGameByIdAndAccessKeyAsync(gameId, accessKey);
 
         ValidateGameStatus(gameModel);
         ValidatePlayerMove(gameModel, accessKey);
@@ -102,6 +108,8 @@ public class GameService(IRepository<GameModel> gameRepository, IRepository<Move
         var moveResult = ProccessMove(gameModel, winLength, moveRequest.Row, moveRequest.Column);
 
         var result = await ApplyResultAsync(gameModel, moveResult, accessKey);
+
+        etagService.SetLastMoveETag(gameId, moveResult.ToMoveDto());
 
         return showBoard ? result.WithBoard(gameModel.Moves, gameModel.Width, gameModel.Height) : result;
     }
@@ -142,14 +150,17 @@ public class GameService(IRepository<GameModel> gameRepository, IRepository<Move
         return gameBoard.Move();
     }
 
-    private async Task<GameModel> GetGameByAccessKeyAsync(Guid accessKey)
+    private async Task<GameModel> GetGameByIdAndAccessKeyAsync(long gameId, Guid accessKey)
     {
         var game = await gameRepository
             .GetAll()
             .Include(x => x.Moves)
             .FirstOrDefaultAsync(
-                x => x.AccessKeyPlayerX == accessKey ||
-                x.AccessKeyPlayerO == accessKey);
+                x => gameId == x.Id &&
+                (
+                    x.AccessKeyPlayerX == accessKey ||
+                    x.AccessKeyPlayerO == accessKey)
+                );
 
         if (game is null)
         {

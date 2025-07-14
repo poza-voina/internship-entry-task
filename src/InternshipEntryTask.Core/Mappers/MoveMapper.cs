@@ -9,8 +9,15 @@ public static class MoveMapper
         new MoveDto
         {
             Row = moveModel.Row,
-            Column = moveModel.Column
+            Column = moveModel.Column,
+            CellValue = moveModel.CellValue,
         };
+
+    public static MoveDto ToMoveDto(this MoveRequest moveModel) => new MoveDto
+    {
+        Row = moveModel.Row,
+        Column = moveModel.Column
+    };
 
     public static IEnumerable<MoveDto> ToMoveDto(this IEnumerable<MoveModel> moveModels) =>
         moveModels.Select(x => x.ToMoveDto());

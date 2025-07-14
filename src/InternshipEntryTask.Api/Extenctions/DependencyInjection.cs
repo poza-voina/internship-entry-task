@@ -17,10 +17,6 @@ namespace InternshipEntryTask.Api.Extenctions;
 /// </summary>
 public static class DependencyInjection
 {
-    private const string REQUEST_ID_PROBLEM_DETAIL = "requestId";
-    private const string TRACE_ID_PROBLEM_DETAIL = "traceId";
-    private const char HTTP_METHOD_SEPARATOR = ' ';
-
     /// <summary>
     /// Добавляет контекст базы данных
     /// </summary>
@@ -42,6 +38,7 @@ public static class DependencyInjection
     {
         services.AddScoped<IGameService, GameService>();
         services.AddSingleton<IGameBoardEvaluatorFactory, GameBoardEvaluatorFactory>();
+        services.AddSingleton<IETagService, ETagService>();
     }
 
     /// <summary>
@@ -83,10 +80,10 @@ public static class DependencyInjection
         {
             options.CustomizeProblemDetails = context =>
             {
-                context.ProblemDetails.Instance = string.Join(HTTP_METHOD_SEPARATOR, context.HttpContext.Request.Method, context.HttpContext.Request.Path.Value);
-                context.ProblemDetails.Extensions.TryAdd(REQUEST_ID_PROBLEM_DETAIL, context.HttpContext.TraceIdentifier);
+                context.ProblemDetails.Instance = string.Join(SystemConstants.HTTP_METHOD_SEPARATOR, context.HttpContext.Request.Method, context.HttpContext.Request.Path.Value);
+                context.ProblemDetails.Extensions.TryAdd(SystemConstants.REQUEST_ID_PROBLEM_DETAIL, context.HttpContext.TraceIdentifier);
                 var activity = context.HttpContext.Features.Get<IHttpActivityFeature>()?.Activity;
-                context.ProblemDetails.Extensions.TryAdd(TRACE_ID_PROBLEM_DETAIL, activity?.Id);
+                context.ProblemDetails.Extensions.TryAdd(SystemConstants.TRACE_ID_PROBLEM_DETAIL, activity?.Id);
             };
         });
 

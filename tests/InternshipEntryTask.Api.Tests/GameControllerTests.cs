@@ -10,6 +10,14 @@ namespace InternshipEntryTask.Api.Tests;
 
 public class GameControllerTests : ControllerTestsBase
 {
+    private const string VERSION = "v1";
+    private const string PATH_TO_GAMES = VERSION + "/games";
+    private const string PATH_TO_GAME_FORMAT = PATH_TO_GAMES + "/{0}";
+    private const string PATH_TO_GAME_JOIN = PATH_TO_GAMES + "/join";
+    private const string PATH_TO_GAME_MOVE_FORMAT = PATH_TO_GAMES + "/{0}/move";
+    private const string ACCESS_KEY_HEADER_KEY = "X-Access-Key";
+    private const string JOIN_KEY_HEADER_KEY = "X-Join-Key";
+
     public GameControllerTests(PostgreSqlFixture fixture) : base(fixture)
     {
     }
@@ -32,7 +40,7 @@ public class GameControllerTests : ControllerTestsBase
         };
 
         // Act
-        var response = await client.PostAsync("/games", EmptyContent);
+        var response = await client.PostAsync(PATH_TO_GAMES, EmptyContent);
         var actualData = await response.Content.ReadFromJsonAsync<GameDto>(DefaultSerializerOptions);
 
         // Assert
@@ -70,8 +78,8 @@ public class GameControllerTests : ControllerTestsBase
         };
 
         // Act
-        await client.PostAsync("/games", EmptyContent);
-        var response = await client.GetAsync("/games/1");
+        await client.PostAsync(PATH_TO_GAMES, EmptyContent);
+        var response = await client.GetAsync(string.Format(PATH_TO_GAME_FORMAT,  1));
         var actualData = await response.Content.ReadFromJsonAsync<GameDto>(DefaultSerializerOptions);
 
         // Assert
@@ -95,7 +103,7 @@ public class GameControllerTests : ControllerTestsBase
         var client = CreateIsolatedClient();
 
         // Act
-        var response = await client.GetAsync("/games/1");
+        var response = await client.GetAsync(string.Format(PATH_TO_GAME_FORMAT, 1));
 
         // Assert
         response.StatusCode.Should().Be(HttpStatusCode.NotFound);
@@ -119,17 +127,17 @@ public class GameControllerTests : ControllerTestsBase
             Moves = []
         };
 
-        var createGameResponse = await client.PostAsync("/games", EmptyContent);
+        var createGameResponse = await client.PostAsync(PATH_TO_GAMES, EmptyContent);
         var joinkey = (await createGameResponse.Content.ReadFromJsonAsync<GameDto>(DefaultSerializerOptions))!.JoinKey.ToString()!;
 
-        var joinRequestFirstPlayer = new HttpRequestBuilder(HttpMethod.Post, "games/join")
+        var joinRequestFirstPlayer = new HttpRequestBuilder(HttpMethod.Post, PATH_TO_GAME_JOIN)
             .WithJsonContent(new JoinRequest { PlayerSymbol = CellValue.X })
-            .WithHeader("X-Join-Key", joinkey)
+            .WithHeader(JOIN_KEY_HEADER_KEY, joinkey)
             .Build();
 
-        var joinRequestSecondPlayer = new HttpRequestBuilder(HttpMethod.Post, "games/join")
+        var joinRequestSecondPlayer = new HttpRequestBuilder(HttpMethod.Post, PATH_TO_GAME_JOIN)
             .WithJsonContent(new JoinRequest { PlayerSymbol = CellValue.O })
-            .WithHeader("X-Join-Key", joinkey)
+            .WithHeader(JOIN_KEY_HEADER_KEY, joinkey)
             .Build();
 
         // Act
@@ -185,17 +193,17 @@ public class GameControllerTests : ControllerTestsBase
             Moves = []
         };
 
-        var createGameResponse = await client.PostAsync("/games", EmptyContent);
+        var createGameResponse = await client.PostAsync(PATH_TO_GAMES, EmptyContent);
         var joinkey = (await createGameResponse.Content.ReadFromJsonAsync<GameDto>(DefaultSerializerOptions))!.JoinKey.ToString()!;
 
-        var joinRequestFirstPlayer = new HttpRequestBuilder(HttpMethod.Post, "games/join")
+        var joinRequestFirstPlayer = new HttpRequestBuilder(HttpMethod.Post, PATH_TO_GAME_JOIN)
             .WithJsonContent(new JoinRequest { PlayerSymbol = CellValue.X })
-            .WithHeader("X-Join-Key", joinkey)
+            .WithHeader(JOIN_KEY_HEADER_KEY, joinkey)
             .Build();
 
-        var joinRequestSecondPlayer = new HttpRequestBuilder(HttpMethod.Post, "games/join")
+        var joinRequestSecondPlayer = new HttpRequestBuilder(HttpMethod.Post, PATH_TO_GAME_JOIN)
             .WithJsonContent(new JoinRequest { PlayerSymbol = CellValue.X })
-            .WithHeader("X-Join-Key", joinkey)
+            .WithHeader(JOIN_KEY_HEADER_KEY, joinkey)
             .Build();
 
         // Act
@@ -223,12 +231,12 @@ public class GameControllerTests : ControllerTestsBase
         };
 
 
-        var createGameResponse = await client.PostAsync("/games", EmptyContent);
+        var createGameResponse = await client.PostAsync(PATH_TO_GAMES, EmptyContent);
         var joinkey = (await createGameResponse.Content.ReadFromJsonAsync<GameDto>(DefaultSerializerOptions))!.JoinKey.ToString()!;
 
-        var joinRequest = new HttpRequestBuilder(HttpMethod.Post, "games/join")
+        var joinRequest = new HttpRequestBuilder(HttpMethod.Post, PATH_TO_GAME_JOIN)
             .WithJsonContent(new JoinRequest { PlayerSymbol = CellValue.X })
-            .WithHeader("X-Join-Key", joinkey)
+            .WithHeader(JOIN_KEY_HEADER_KEY, joinkey)
             .Build();
 
         var joinResponse = await client.SendAsync(joinRequest);
@@ -236,9 +244,9 @@ public class GameControllerTests : ControllerTestsBase
         var accessKey = (await joinResponse.Content.ReadFromJsonAsync<GameDto>(DefaultSerializerOptions))!.AccessKey.ToString()!;
 
         var requests = incorrectMoves.Select(x =>
-            new HttpRequestBuilder(HttpMethod.Post, "games/move")
+            new HttpRequestBuilder(HttpMethod.Post, string.Format(PATH_TO_GAME_MOVE_FORMAT, 1))
                 .WithJsonContent(x)
-                .WithHeader("X-Access-Key", accessKey)
+                .WithHeader(ACCESS_KEY_HEADER_KEY, accessKey)
                 .Build()
         ).ToList();
 
@@ -263,17 +271,17 @@ public class GameControllerTests : ControllerTestsBase
         // Arrange
         var client = CreateIsolatedClient();
 
-        var createGameResponse = await client.PostAsync("/games", EmptyContent);
+        var createGameResponse = await client.PostAsync(PATH_TO_GAMES, EmptyContent);
         var joinkey = (await createGameResponse.Content.ReadFromJsonAsync<GameDto>(DefaultSerializerOptions))!.JoinKey.ToString()!;
 
-        var joinRequestFirstPlayer = new HttpRequestBuilder(HttpMethod.Post, "games/join")
+        var joinRequestFirstPlayer = new HttpRequestBuilder(HttpMethod.Post, PATH_TO_GAME_JOIN)
             .WithJsonContent(new JoinRequest { PlayerSymbol = CellValue.X })
-            .WithHeader("X-Join-Key", joinkey)
+            .WithHeader(JOIN_KEY_HEADER_KEY, joinkey)
             .Build();
 
-        var joinRequestSecondPlayer = new HttpRequestBuilder(HttpMethod.Post, "games/join")
+        var joinRequestSecondPlayer = new HttpRequestBuilder(HttpMethod.Post, PATH_TO_GAME_JOIN)
             .WithJsonContent(new JoinRequest { PlayerSymbol = CellValue.O })
-            .WithHeader("X-Join-Key", joinkey)
+            .WithHeader(JOIN_KEY_HEADER_KEY, joinkey)
             .Build();
 
         var firstJoinGameResponse = await client.SendAsync(joinRequestFirstPlayer);
@@ -286,9 +294,9 @@ public class GameControllerTests : ControllerTestsBase
             ];
 
         var requests = moves.Select((move, index) =>
-            new HttpRequestBuilder(HttpMethod.Post, "games/move")
+            new HttpRequestBuilder(HttpMethod.Post, string.Format(PATH_TO_GAME_MOVE_FORMAT, 1))
                 .WithJsonContent(move)
-                .WithHeader("X-Access-Key", accessKeys[index % accessKeys.Length])
+                .WithHeader(ACCESS_KEY_HEADER_KEY, accessKeys[index % accessKeys.Length])
                 .Build()
         ).ToList();
 
@@ -299,7 +307,7 @@ public class GameControllerTests : ControllerTestsBase
             moveResponse.EnsureSuccessStatusCode();
         }
 
-        var gameResponse = await client.GetAsync("games/1");
+        var gameResponse = await client.GetAsync(string.Format(PATH_TO_GAME_FORMAT, 1));
 
         var actualGame = await gameResponse.Content.ReadFromJsonAsync<GameDto>(DefaultSerializerOptions);
 

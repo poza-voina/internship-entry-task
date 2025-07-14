@@ -8,5 +8,5 @@ public interface IGameService
     Task<GameDto> CreateGameAsync();
     Task<GameDto> GetGameAsync(long gameId, bool showBoard);
     Task<GameDto> JoinGameAsync(JoinRequest request, Guid joinKey);
-    Task<GameDto> MoveAsync(MoveRequest moveRequest, Guid accessKey, bool showBoard);
+    Task<GameDto> MoveAsync(long gameId, MoveRequest moveRequest, Guid accessKey, bool showBoard);
 }

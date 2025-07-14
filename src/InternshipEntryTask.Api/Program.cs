@@ -3,6 +3,8 @@ using InternshipEntryTask.Api.Extenctions;
 using Serilog;
 using System.Reflection;
 using System.Text.Json.Serialization;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ApiExplorer;
 
 public class Program
 {
@@ -27,6 +29,21 @@ public class Program
         services.AddProblems();
         builder.AddSerilog();
         services.AddExceptionHandler<ExceptionHandler>();
+        services.AddMemoryCache();
+        
+        builder.Services.AddApiVersioning(options =>
+        {
+            options.AssumeDefaultVersionWhenUnspecified = true;
+            options.DefaultApiVersion = new ApiVersion(1, 0);
+            options.ReportApiVersions = true;
+        });
+
+        builder.Services.AddVersionedApiExplorer(options =>
+        {
+            options.GroupNameFormat = "'v'VVV";
+            options.SubstituteApiVersionInUrl = true;
+        });
+
 
         services.AddControllers()
             .AddJsonOptions(options =>
@@ -51,10 +68,15 @@ public class Program
         app.UseExceptionHandler();
         app.UseHttpsRedirection();
         app.UseSwagger();
-        app.UseSwaggerUI(c =>
+        
+        app.UseSwaggerUI(options =>
         {
-            c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
-
+            var provider = app.Services.GetRequiredService<IApiVersionDescriptionProvider>();
+            foreach (var desc in provider.ApiVersionDescriptions)
+            {
+                options.SwaggerEndpoint($"/swagger/{desc.GroupName}/swagger.json",
+                    $"API {desc.GroupName.ToUpperInvariant()}");
+            }
         });
 
         app.MapControllers();
