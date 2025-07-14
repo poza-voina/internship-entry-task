@@ -16,7 +16,7 @@ public class GameBoardEvaluator(BoardDto board) : IGameBoardEvaluator
 
     public BoardResultDto Move()
     {
-        if (Board.Row >= Board.GameSettings.Height || Board.Column >= Board.GameSettings.Width)
+        if (Board.Row < 0 || Board.Column < 0 || Board.Row >= Board.GameSettings.Height || Board.Column >= Board.GameSettings.Width)
         {
             throw new BaseGameException(MessagesConstants.BOARD_OUT_OF_RANGE_ERROR_MESSAGE);
         }

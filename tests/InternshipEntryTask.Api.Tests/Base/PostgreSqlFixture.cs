@@ -3,7 +3,7 @@ using DotNet.Testcontainers.Containers;
 using Npgsql;
 using Xunit;
 
-namespace InternshipEntryTask.Api.Tests;
+namespace InternshipEntryTask.Api.Tests.Base;
 
 public class PostgreSqlFixture : IAsyncLifetime
 {

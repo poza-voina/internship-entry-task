@@ -8,6 +8,12 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+	  <Compile Remove="Comparers\**" />
+	  <EmbeddedResource Remove="Comparers\**" />
+	  <None Remove="Comparers\**" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<Content Include="appsettings.json">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 			<ExcludeFromSingleFile>true</ExcludeFromSingleFile>
@@ -16,6 +22,10 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<PackageReference Include="coverlet.collector" Version="6.0.4">
+		  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		  <PrivateAssets>all</PrivateAssets>
+		</PackageReference>
 		<PackageReference Include="FluentAssertions" Version="8.5.0" />
 		<PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="9.0.7" />
 		<PackageReference Include="Microsoft.Extensions.Configuration" Version="9.0.7" />
@@ -33,10 +43,6 @@
 	<ItemGroup>
 		<ProjectReference Include="..\..\src\InternshipEntryTask.Infrastructure\InternshipEntryTask.Infrastructure.csproj" />
 		<ProjectReference Include="..\..\src\InternshipEntryTask.Api\InternshipEntryTask.Api.csproj" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Folder Include="Comparers\" />
 	</ItemGroup>
 
 </Project>

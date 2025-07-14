@@ -1,4 +1,6 @@
+using InternshipEntryTask.Api;
 using InternshipEntryTask.Api.Extenctions;
+using Serilog;
 using System.Reflection;
 using System.Text.Json.Serialization;
 
@@ -22,6 +24,9 @@ public class Program
         services.AddApplicationDbContext(configuration);
         services.AddServices();
         services.AddRepositories();
+        services.AddProblems();
+        builder.AddSerilog();
+        services.AddExceptionHandler<ExceptionHandler>();
 
         services.AddControllers()
             .AddJsonOptions(options =>
@@ -43,6 +48,7 @@ public class Program
             app.MapOpenApi();
         }
 
+        app.UseExceptionHandler();
         app.UseHttpsRedirection();
         app.UseSwagger();
         app.UseSwaggerUI(c =>

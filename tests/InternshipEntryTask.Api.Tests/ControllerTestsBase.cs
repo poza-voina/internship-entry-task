@@ -1,4 +1,6 @@
-﻿using System.Text.Json;
+﻿using InternshipEntryTask.Api.Tests.Base;
+using System.Text;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 using Xunit;
 
@@ -23,7 +25,10 @@ public class ControllerTestsBase : IClassFixture<PostgreSqlFixture>
     public HttpClient CreateIsolatedClient() =>
         new CustomWebApplicationFactory(_fixture.ConnectionString, NewSchemaName).CreateClient();
     
+    public StringContent EmptyContent { get; } = 
+        new StringContent(string.Empty, Encoding.UTF8, "application/json");
 
     private string NewSchemaName =>
         string.Format(SCHEMA_FORMAT, Guid.NewGuid());
+
 }

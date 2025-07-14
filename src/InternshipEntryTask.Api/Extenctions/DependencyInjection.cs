@@ -66,7 +66,7 @@ public static class DependencyInjection
     /// Добавляет логирование
     /// </summary>
     /// <param name="builder"></param>
-    public static void AddSerialLog(this WebApplicationBuilder builder)
+    public static void AddSerilog(this WebApplicationBuilder builder)
     {
         builder.Host.UseSerilog((context, configuration) =>
             configuration.ReadFrom.Configuration(context.Configuration));

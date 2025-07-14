@@ -64,10 +64,18 @@ public class GameService(IRepository<GameModel> gameRepository, IRepository<Move
         switch (request.PlayerSymbol)
         {
             case CellValue.X:
+                if (model.AccessKeyPlayerX is { })
+                {
+                    throw new BaseGameException(MessagesConstants.PLAYER_X_ALREADY_EXISTS_MESSAGE);
+                }
                 model.AccessKeyPlayerX = accessKey;
                 break;
 
             case CellValue.O:
+                if (model.AccessKeyPlayerO is { })
+                {
+                    throw new BaseGameException(MessagesConstants.PLAYER_O_ALREADY_EXISTS_MESSAGE);
+                }
                 model.AccessKeyPlayerO = accessKey;
                 break;
 

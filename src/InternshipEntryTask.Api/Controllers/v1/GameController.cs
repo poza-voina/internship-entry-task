@@ -65,7 +65,7 @@ public class GameController(IGameService gameService) : ControllerBase
     /// <param name="accessKey">Ключ авторизации</param>
     /// <param name="showBoard">Флаг, показывать доску или нет</param>
     /// <returns>Объект игры <see cref="GameDto"/></returns>
-    [HttpPost("/move")]
+    [HttpPost("move")]
     [ProducesResponseType(typeof(GameDto), (int)HttpStatusCode.OK)]
     public async Task<IResult> Move(
         [FromBody] MoveRequest moveRequest,

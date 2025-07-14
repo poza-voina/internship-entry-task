@@ -7,7 +7,7 @@ using Microsoft.VisualStudio.TestPlatform.TestHost;
 using System;
 using Xunit;
 
-namespace InternshipEntryTask.Api.Tests;
+namespace InternshipEntryTask.Api.Tests.Base;
 
 public class CustomWebApplicationFactory : WebApplicationFactory<Program>, IDisposable
 {
