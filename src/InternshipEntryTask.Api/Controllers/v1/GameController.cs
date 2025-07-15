@@ -76,7 +76,7 @@ public class GameController(IGameService gameService, IETagService etagService) 
         [FromHeader(Name = "X-Access-Key")] Guid accessKey,
         [FromHeader(Name = "Show-Board")] bool showBoard)
     {
-        if (etagService.Check(gameId, moveRequest, out var etag))
+        if (etagService.Check(gameId, accessKey, moveRequest, out var etag))
         {
             Response.Headers.ETag = etag;
             return Results.Ok();
@@ -84,7 +84,7 @@ public class GameController(IGameService gameService, IETagService etagService) 
 
         var result = await gameService.MoveAsync(gameId, moveRequest, accessKey, showBoard);
 
-        Response.Headers.ETag = etagService.GetETag(gameId);
+        Response.Headers.ETag = etagService.GetETag(gameId, accessKey);
         return Results.Ok(result);
     }
 }

@@ -32,9 +32,9 @@ public class ETagService : IETagService
     }
 
     /// <inheritdoc/>
-    public bool Check(long gameId, MoveRequest moveRequest, out string etag)
+    public bool Check(long gameId, Guid accessKey, MoveRequest moveRequest, out string etag)
     {
-        var (key, newValue) = GenerateKeyValue(gameId, moveRequest.ToMoveDto());
+        var (key, newValue) = GenerateKeyValue(gameId, accessKey, moveRequest.ToMoveDto());
 
         _memmoryCache.TryGetValue(key, out var value);
         if (newValue == value as string)
@@ -51,9 +51,9 @@ public class ETagService : IETagService
     }
 
     /// <inheritdoc/>
-    public string GetETag(long gameId)
+    public string GetETag(long gameId, Guid accessKey)
     {
-        var key = string.Format(SystemConstants.ETAG_KEY_FORMAT, gameId);
+        var key = string.Format(SystemConstants.ETAG_KEY_FORMAT, gameId, accessKey);
 
         if (!_memmoryCache.TryGetValue(key, out var value))
         {
@@ -64,16 +64,16 @@ public class ETagService : IETagService
     }
 
     /// <inheritdoc/>
-    public void SetLastMoveETag(long gameId, MoveDto moveDto)
+    public void SetLastMoveETag(long gameId, Guid accessKey, MoveDto moveDto)
     {
-        var (key, value) = GenerateKeyValue(gameId, moveDto);
+        var (key, value) = GenerateKeyValue(gameId, accessKey, moveDto);
 
         _memmoryCache.Set(key, value, _ttl);
     }
 
-    private (string Key, string Value) GenerateKeyValue(long gameId, MoveDto moveDto)
+    private (string Key, string Value) GenerateKeyValue(long gameId, Guid accessKey, MoveDto moveDto)
     {
-        var key = string.Format(SystemConstants.ETAG_KEY_FORMAT, gameId);
+        var key = string.Format(SystemConstants.ETAG_KEY_FORMAT, accessKey, gameId);
 
         var value = string.Format(SystemConstants.ETAG_VALUE_FORMAT, moveDto.Row, moveDto.Column);
 

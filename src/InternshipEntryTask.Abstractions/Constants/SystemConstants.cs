@@ -8,7 +8,7 @@ public class SystemConstants
     /// <summary>
     /// Формат ключа ETag
     /// </summary>
-    public const string ETAG_KEY_FORMAT = "etag:move:{0}";
+    public const string ETAG_KEY_FORMAT = "etag:move:{0}:{1}";
 
     /// <summary>
     /// Формат значения ETag

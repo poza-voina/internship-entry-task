@@ -111,7 +111,7 @@ public class GameService(
 
         var result = await ApplyResultAsync(gameModel, moveResult, accessKey);
 
-        etagService.SetLastMoveETag(gameId, moveResult.ToMoveDto());
+        etagService.SetLastMoveETag(gameId, accessKey, moveResult.ToMoveDto());
 
         return showBoard ? result.WithBoard(gameModel.Moves, gameModel.Width, gameModel.Height) : result;
     }
