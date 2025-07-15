@@ -1,0 +1,67 @@
+version: '3.8'
+
+networks:
+  entry-task:
+    name: entry-task
+    driver: bridge
+
+services:
+  postgres:
+    image: postgres:17
+    container_name: postgres-db
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=psql
+      - POSTGRES_DB=test
+    ports:
+      - "5432:5432"
+    restart: unless-stopped
+    networks:
+      - entry-task
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  migration-runner:
+    build:
+      context: .
+      dockerfile: Dockerfile.migration-runner
+    container_name: migration-runner
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - ConnectionStrings__PostgreSqlConnection=User ID=postgres;Password=psql;Server=postgres;Port=5432;Database=test;Pooling=true;
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - entry-task
+    restart: "no"
+
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: api-service
+    ports:
+      - "8080:8080"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - ConnectionStrings__PostgreSqlConnection=User ID=postgres;Password=psql;Server=postgres;Port=5432;Database=test;Pooling=true;
+      - Cache__Ttl=5
+      - GameSettings__Height=3
+      - GameSettings__Width=3
+      - GameSettings__WinLength=3
+      - GameSettings__Chance=10
+    depends_on:
+      migration-runner:
+        condition: service_completed_successfully
+    restart: unless-stopped
+    networks:
+      - entry-task
+
+volumes:
+  postgres_data:

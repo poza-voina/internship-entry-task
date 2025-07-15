@@ -49,11 +49,8 @@ public class GameService(
     /// <inheritdoc/>
     public async Task<GameDto> GetGameAsync(long gameId, bool showBoard)
     {
-        var query = gameRepository.GetAll();
-        if (showBoard)
-        {
-            query = query.Include(x => x.Moves);
-        }
+        var query = gameRepository.GetAll()
+            .Include(x => x.Moves);
 
         var gameModel = await query.FirstOrDefaultAsync(x => x.Id == gameId) ??
             throw new EntityNotFoundException(string.Format(MessagesConstants.GAME_NOTFOUND_ERROR_MESSAGE_FORMAT, gameId));
