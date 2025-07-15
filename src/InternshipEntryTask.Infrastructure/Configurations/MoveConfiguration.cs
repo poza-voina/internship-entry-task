@@ -9,6 +9,7 @@ namespace InternshipEntryTask.Infrastructure.Configurations;
 /// </summary>
 public class MoveConfiguration : IEntityTypeConfiguration<MoveModel>
 {
+    /// <inheritdoc/>
     public void Configure(EntityTypeBuilder<MoveModel> builder)
     {
         builder

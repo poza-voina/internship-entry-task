@@ -9,6 +9,7 @@ namespace InternshipEntryTask.Infrastructure.Configurations;
 /// </summary>
 public class GameConfiguration : IEntityTypeConfiguration<GameModel>
 {
+    /// <inheritdoc/>
     public void Configure(EntityTypeBuilder<GameModel> builder)
     {
         builder

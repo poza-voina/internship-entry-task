@@ -14,6 +14,7 @@ using System.ComponentModel;
 
 namespace InternshipEntryTask.Core.Services;
 
+/// <inheritdoc/>
 public class GameService(
     IRepository<GameModel> gameRepository,
     IRepository<MoveModel> moveRepository,
@@ -26,6 +27,7 @@ public class GameService(
         configuration.GetRequiredSection(EnviromentConstants.GAME_SECTION_NAME)
         .Get<GameSettings>()!;
 
+    /// <inheritdoc/>
     public async Task<GameDto> CreateGameAsync()
     {
         var gameSettings = GameSettings;
@@ -44,6 +46,7 @@ public class GameService(
             .WithJoinKey(gameModel.JoinKey);
     }
 
+    /// <inheritdoc/>
     public async Task<GameDto> GetGameAsync(long gameId, bool showBoard)
     {
         var query = gameRepository.GetAll();
@@ -58,8 +61,9 @@ public class GameService(
         var result = gameModel.ToGameDto();
 
         return showBoard ? result.WithBoard(gameModel.Moves, gameModel.Width, gameModel.Height) : result;
-    } 
+    }
 
+    /// <inheritdoc/>
     public async Task<GameDto> JoinGameAsync(JoinRequest request, Guid joinKey)
     {
         var model = await gameRepository.GetAll()
@@ -95,6 +99,7 @@ public class GameService(
             .WithAccessKey(accessKey);
     }
 
+    /// <inheritdoc/>
     public async Task<GameDto> MoveAsync(long gameId, MoveRequest moveRequest, Guid accessKey, bool showBoard)
     {
         var winLength = configuration.GetRequiredSection(EnviromentConstants.GAME_SECTION_NAME)

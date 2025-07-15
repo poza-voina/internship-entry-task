@@ -3,6 +3,10 @@ using Microsoft.EntityFrameworkCore;
 
 namespace InternshipEntryTask.Infrastructure.Repositories.Interfaces;
 
+/// <summary>
+/// Базовый репозитория
+/// </summary>
+/// <typeparam name="TModel">Модель БД</typeparam>
 public interface IRepository<TModel> where TModel : class, IDatabaseModel
 {
     /// <summary>

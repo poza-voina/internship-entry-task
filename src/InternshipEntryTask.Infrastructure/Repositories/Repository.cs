@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace InternshipEntryTask.Infrastructure.Repositories;
 
+/// <inheritdoc/>
 public class Repository<TModel>(ApplicationDbContext dbContext) : IRepository<TModel> where TModel : class, IDatabaseModel
 {
     private const string CANT_FIND_ENTITY_ERROR_FORMAT = "Не удалось найти сущность с id = {0}";

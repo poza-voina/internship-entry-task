@@ -16,6 +16,11 @@ public class ETagService : IETagService
     private readonly IConfiguration _configuration;
     private readonly TimeSpan _ttl;
 
+    /// <summary>
+    /// Создает объект <inheritdoc cref="ETagService"/>
+    /// </summary>
+    /// <param name="memmoryCache">Кеш</param>
+    /// <param name="configuration">Конфигурация</param>
     public ETagService(IMemoryCache memmoryCache, IConfiguration configuration)
     {
         _memmoryCache = memmoryCache;

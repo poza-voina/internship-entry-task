@@ -6,6 +6,9 @@ using System.Text.Json.Serialization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
 
+/// <summary>
+/// Точка входа в приложение
+/// </summary>
 public class Program
 {
     private static void Main(string[] args)

@@ -8,12 +8,17 @@ using System.ComponentModel;
 
 namespace InternshipEntryTask.Core.Game;
 
+/// <inheritdoc cref="BoardDto"/>
 public class GameBoardEvaluator(BoardDto board) : IGameBoardEvaluator
 {
+    /// <summary>
+    /// Доска
+    /// </summary>
     public BoardDto Board { get; private init; } = board;
 
     private Dictionary<(int Column, int Row), CellValue>? _groupedMoves;
-
+    
+    /// <inheritdoc/>
     public BoardResultDto Move()
     {
         if (Board.Row < 0 || Board.Column < 0 || Board.Row >= Board.GameSettings.Height || Board.Column >= Board.GameSettings.Width)

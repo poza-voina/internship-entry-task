@@ -2,6 +2,9 @@
 
 namespace InternshipEntryTask.Core.Data.Game;
 
+/// <summary>
+/// Модель DTO "Игра"
+/// </summary>
 public class GameDto
 {
     /// <summary>
