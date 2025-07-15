@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc.ApiExplorer;
-using InternshipEntryTask.Core.Data.Game;
+﻿using InternshipEntryTask.Core.Data.Game;
 using InternshipEntryTask.Core.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;

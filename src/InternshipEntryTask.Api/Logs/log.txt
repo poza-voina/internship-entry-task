@@ -1,0 +1,58 @@
+2025-07-15 18:01:53.104 +03:00 [INF] Now listening on: https://localhost:7071
+2025-07-15 18:01:53.123 +03:00 [INF] Now listening on: http://localhost:5205
+2025-07-15 18:01:53.200 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-07-15 18:01:53.203 +03:00 [INF] Hosting environment: Development
+2025-07-15 18:01:53.204 +03:00 [INF] Content root path: E:\projects\entry\internship-entry-task\src\InternshipEntryTask.Api
+2025-07-15 18:02:30.676 +03:00 [INF] Request starting HTTP/2 POST https://localhost:7071/v1/games - null 0
+2025-07-15 18:02:30.818 +03:00 [INF] Executing endpoint 'InternshipEntryTask.Api.Controllers.v1.GameController.CreateGame (InternshipEntryTask.Api)'
+2025-07-15 18:02:30.842 +03:00 [INF] Route matched with {action = "CreateGame", controller = "Game"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Http.IResult] CreateGame() on controller InternshipEntryTask.Api.Controllers.v1.GameController (InternshipEntryTask.Api).
+2025-07-15 18:02:33.727 +03:00 [INF] Executed DbCommand (76ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = Guid), @p2='?' (DbType = Int32), @p3='?' (DbType = Guid), @p4='?', @p5='?' (DbType = Int32), @p6='?' (DbType = Int32), @p7='?' (DbType = Int32), @p8='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO games (anonymous_player_o_id, anonymous_player_x_id, height, join_key, "LastMoveHash", next_move, status, width, "Winner")
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8)
+RETURNING id;
+2025-07-15 18:02:33.790 +03:00 [INF] Setting HTTP status code 200.
+2025-07-15 18:02:33.820 +03:00 [INF] Writing value of type 'GameDto' as Json.
+2025-07-15 18:02:33.835 +03:00 [INF] Executed action InternshipEntryTask.Api.Controllers.v1.GameController.CreateGame (InternshipEntryTask.Api) in 2987.3756ms
+2025-07-15 18:02:33.838 +03:00 [INF] Executed endpoint 'InternshipEntryTask.Api.Controllers.v1.GameController.CreateGame (InternshipEntryTask.Api)'
+2025-07-15 18:02:33.855 +03:00 [INF] Request finished HTTP/2 POST https://localhost:7071/v1/games - 200 null application/json; charset=utf-8 3182.6548ms
+2025-07-15 18:02:48.400 +03:00 [INF] Request starting HTTP/2 POST https://localhost:7071/v1/games/join - application/json 25
+2025-07-15 18:02:48.406 +03:00 [INF] Executing endpoint 'InternshipEntryTask.Api.Controllers.v1.GameController.JoinGame (InternshipEntryTask.Api)'
+2025-07-15 18:02:48.418 +03:00 [INF] Route matched with {action = "JoinGame", controller = "Game"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Http.IResult] JoinGame(InternshipEntryTask.Core.Data.Game.JoinRequest, System.Guid) on controller InternshipEntryTask.Api.Controllers.v1.GameController (InternshipEntryTask.Api).
+2025-07-15 18:02:48.862 +03:00 [INF] Executed DbCommand (7ms) [Parameters=[@__joinKey_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT g.id, g.anonymous_player_o_id, g.anonymous_player_x_id, g.height, g.join_key, g."LastMoveHash", g.next_move, g.status, g.width, g."Winner"
+FROM games AS g
+WHERE g.join_key = @__joinKey_0
+LIMIT 1
+2025-07-15 18:02:48.907 +03:00 [INF] Executed DbCommand (12ms) [Parameters=[@p9='?' (DbType = Int64), @p0='?' (DbType = Guid), @p1='?' (DbType = Guid), @p2='?' (DbType = Int32), @p3='?' (DbType = Guid), @p4='?', @p5='?' (DbType = Int32), @p6='?' (DbType = Int32), @p7='?' (DbType = Int32), @p8='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+UPDATE games SET anonymous_player_o_id = @p0, anonymous_player_x_id = @p1, height = @p2, join_key = @p3, "LastMoveHash" = @p4, next_move = @p5, status = @p6, width = @p7, "Winner" = @p8
+WHERE id = @p9;
+2025-07-15 18:02:48.913 +03:00 [INF] Setting HTTP status code 200.
+2025-07-15 18:02:48.914 +03:00 [INF] Writing value of type 'GameDto' as Json.
+2025-07-15 18:02:48.916 +03:00 [INF] Executed action InternshipEntryTask.Api.Controllers.v1.GameController.JoinGame (InternshipEntryTask.Api) in 495.6228ms
+2025-07-15 18:02:48.918 +03:00 [INF] Executed endpoint 'InternshipEntryTask.Api.Controllers.v1.GameController.JoinGame (InternshipEntryTask.Api)'
+2025-07-15 18:02:48.920 +03:00 [INF] Request finished HTTP/2 POST https://localhost:7071/v1/games/join - 200 null application/json; charset=utf-8 520.3289ms
+2025-07-15 18:03:14.039 +03:00 [INF] Request starting HTTP/2 POST https://localhost:7071/v1/games/53/move - application/json 29
+2025-07-15 18:03:14.078 +03:00 [INF] Executing endpoint 'InternshipEntryTask.Api.Controllers.v1.GameController.Move (InternshipEntryTask.Api)'
+2025-07-15 18:03:14.082 +03:00 [INF] Route matched with {action = "Move", controller = "Game"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Http.IResult] Move(InternshipEntryTask.Core.Data.Game.MoveRequest, Int64, System.Guid, Boolean) on controller InternshipEntryTask.Api.Controllers.v1.GameController (InternshipEntryTask.Api).
+2025-07-15 18:03:14.202 +03:00 [INF] Executed DbCommand (6ms) [Parameters=[@__gameId_0='?' (DbType = Int64), @__accessKey_1='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT g0.id, g0.anonymous_player_o_id, g0.anonymous_player_x_id, g0.height, g0.join_key, g0."LastMoveHash", g0.next_move, g0.status, g0.width, g0."Winner", m."Id", m.access_key_player, m.cell_value, m."column", m.game_id, m.move_index, m.row
+FROM (
+    SELECT g.id, g.anonymous_player_o_id, g.anonymous_player_x_id, g.height, g.join_key, g."LastMoveHash", g.next_move, g.status, g.width, g."Winner"
+    FROM games AS g
+    WHERE @__gameId_0 = g.id AND (g.anonymous_player_x_id = @__accessKey_1 OR g.anonymous_player_o_id = @__accessKey_1)
+    LIMIT 1
+) AS g0
+LEFT JOIN moves AS m ON g0.id = m.game_id
+ORDER BY g0.id
+2025-07-15 18:03:14.236 +03:00 [INF] Executed DbCommand (4ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = Int32), @p2='?' (DbType = Int32), @p3='?' (DbType = Int64), @p4='?' (DbType = Int32), @p5='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO moves (access_key_player, cell_value, "column", game_id, move_index, row)
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5)
+RETURNING "Id";
+2025-07-15 18:03:14.248 +03:00 [INF] Executed DbCommand (3ms) [Parameters=[@p9='?' (DbType = Int64), @p0='?' (DbType = Guid), @p1='?' (DbType = Guid), @p2='?' (DbType = Int32), @p3='?' (DbType = Guid), @p4='?', @p5='?' (DbType = Int32), @p6='?' (DbType = Int32), @p7='?' (DbType = Int32), @p8='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+UPDATE games SET anonymous_player_o_id = @p0, anonymous_player_x_id = @p1, height = @p2, join_key = @p3, "LastMoveHash" = @p4, next_move = @p5, status = @p6, width = @p7, "Winner" = @p8
+WHERE id = @p9;
+2025-07-15 18:03:14.254 +03:00 [INF] Setting HTTP status code 200.
+2025-07-15 18:03:14.255 +03:00 [INF] Writing value of type 'GameDto' as Json.
+2025-07-15 18:03:14.260 +03:00 [INF] Executed action InternshipEntryTask.Api.Controllers.v1.GameController.Move (InternshipEntryTask.Api) in 175.995ms
+2025-07-15 18:03:14.263 +03:00 [INF] Executed endpoint 'InternshipEntryTask.Api.Controllers.v1.GameController.Move (InternshipEntryTask.Api)'
+2025-07-15 18:03:14.265 +03:00 [INF] Request finished HTTP/2 POST https://localhost:7071/v1/games/53/move - 200 null application/json; charset=utf-8 225.8227ms
