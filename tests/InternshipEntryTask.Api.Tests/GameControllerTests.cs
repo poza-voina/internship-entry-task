@@ -79,7 +79,7 @@ public class GameControllerTests(PostgreSqlFixture fixture) : ControllerTestsBas
 
         // Act
         await client.PostAsync(PATH_TO_GAMES, EmptyContent);
-        var response = await client.GetAsync(string.Format(PATH_TO_GAME_FORMAT,  1));
+        var response = await client.GetAsync(string.Format(PATH_TO_GAME_FORMAT, 1));
         var actualData = await response.Content.ReadFromJsonAsync<GameDto>(DefaultSerializerOptions);
 
         // Assert
@@ -252,7 +252,7 @@ public class GameControllerTests(PostgreSqlFixture fixture) : ControllerTestsBas
 
         // Act
         var responses = new List<HttpResponseMessage>();
-        foreach(var item in requests)
+        foreach (var item in requests)
         {
             responses.Add(await client.SendAsync(item));
         }
@@ -266,10 +266,10 @@ public class GameControllerTests(PostgreSqlFixture fixture) : ControllerTestsBas
 
     [Theory]
     [ClassData(typeof(GameMovesData))]
-    public async Task Move_WhenPlayGame_ReturnValidGameResultState(GameDto expectedGame, List<MoveRequest> moves)
+    public async Task Move_WhenPlayGame_ReturnValidGameResultState(GameDto expectedGame, List<MoveRequest> moves, string? appsettings)
     {
         // Arrange
-        var client = CreateIsolatedClient(DefaultIsolatedClientOptions);
+        var client = CreateIsolatedClient(new() { PathToEnvironment = appsettings, ContainerFixture = fixture });
 
         var createGameResponse = await client.PostAsync(PATH_TO_GAMES, EmptyContent);
         var joinkey = (await createGameResponse.Content.ReadFromJsonAsync<GameDto>(DefaultSerializerOptions))!.JoinKey.ToString()!;
@@ -321,7 +321,7 @@ public class GameControllerTests(PostgreSqlFixture fixture) : ControllerTestsBas
         );
     }
 
-    public class GameMovesData : TheoryData<GameDto, List<MoveRequest>>
+    public class GameMovesData : TheoryData<GameDto, List<MoveRequest>, string?>
     {
         public GameMovesData()
         {
@@ -345,7 +345,8 @@ public class GameControllerTests(PostgreSqlFixture fixture) : ControllerTestsBas
                     new MoveRequest {Row = 0, Column = 1},
                     new MoveRequest {Row = 1, Column = 1},
                     new MoveRequest {Row = 0, Column = 2},
-                });
+                },
+                null);
 
 
             Add(
@@ -368,8 +369,8 @@ public class GameControllerTests(PostgreSqlFixture fixture) : ControllerTestsBas
                     new MoveRequest { Row = 1, Column = 1 },
                     new MoveRequest { Row = 2, Column = 2 },
                     new MoveRequest { Row = 2, Column = 1 },
-                }
-            );
+                },
+                null);
 
             Add(
                 new GameDto
@@ -394,8 +395,30 @@ public class GameControllerTests(PostgreSqlFixture fixture) : ControllerTestsBas
                     new MoveRequest { Row = 2, Column = 1 },
                     new MoveRequest { Row = 2, Column = 0 },
                     new MoveRequest { Row = 2, Column = 2 },
-                }
+                },
+                null
             );
+
+            Add(
+                new GameDto
+                {
+                    Id = 1,
+                    NextMove = CellValue.O,
+                    Status = GameStatus.Finished,
+                    Winner = WinnerStatus.X,
+                    Width = 20,
+                    Height = 20,
+                    JoinKey = null,
+                    AccessKey = null
+                },
+                new List<MoveRequest>
+                {
+                    new MoveRequest { Row = 10, Column = 9 },
+                    new MoveRequest { Row = 5,  Column = 5 },
+                    new MoveRequest { Row = 10, Column = 10 },
+                    new MoveRequest { Row = 6,  Column = 5 },
+                    new MoveRequest { Row = 10, Column = 11 }
+                }, "TestConfigs/appsettings.test.big.game.json");
         }
     }
 }

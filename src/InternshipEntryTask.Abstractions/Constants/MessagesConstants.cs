@@ -48,5 +48,15 @@ public class MessagesConstants
     /// <summary>
     /// Сообщение о существовании игрока O
     /// </summary>
-    public const string PLAYER_O_ALREADY_EXISTS_MESSAGE = "Игрок O уже существует";   
+    public const string PLAYER_O_ALREADY_EXISTS_MESSAGE = "Игрок O уже существует";
+
+    /// <summary>
+    /// Сообщение о неправильном размере поля
+    /// </summary>
+    public const string ENV_WIDTH_HEIGHT_ERROR_MESSAGE_FORMAT = "Некорректные размеры поля. Ширина и высота должны быть в пределах [{0}, {1}]";
+
+    /// <summary>
+    /// Сообщение о неправильном условии выигрыша
+    /// </summary>
+    public const string ENV_WINLENGHT_ERROR_MESSAGE_FORMAT = "Некорректное условие выигрыша. Текущие размеры Ширина = {0} Высота = {1}";
 }

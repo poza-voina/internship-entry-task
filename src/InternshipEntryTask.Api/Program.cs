@@ -1,10 +1,16 @@
+using InternshipEntryTask.Abstractions.Constants;
+using InternshipEntryTask.Abstractions.Exceptions;
 using InternshipEntryTask.Api;
 using InternshipEntryTask.Api.Extenctions;
+using InternshipEntryTask.Core.Data.Game;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ApiExplorer;
+using Microsoft.VisualBasic;
 using Serilog;
 using System.Reflection;
 using System.Text.Json.Serialization;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.ApiExplorer;
+
+/// Есть какие-то опции у IConfiguration) а я все через получение секции делал) переделывать не буду.
 
 /// <summary>
 /// Точка входа в приложение
@@ -33,7 +39,7 @@ public class Program
         builder.AddSerilog();
         services.AddExceptionHandler<ExceptionHandler>();
         services.AddMemoryCache();
-        
+
         builder.Services.AddApiVersioning(options =>
         {
             options.AssumeDefaultVersionWhenUnspecified = true;
@@ -62,6 +68,7 @@ public class Program
         });
 
         var app = builder.Build();
+        ValidateGameSection(configuration);
 
         if (app.Environment.IsDevelopment())
         {
@@ -71,7 +78,7 @@ public class Program
         app.UseExceptionHandler();
         app.UseHttpsRedirection();
         app.UseSwagger();
-        
+
         app.UseSwaggerUI(options =>
         {
             var provider = app.Services.GetRequiredService<IApiVersionDescriptionProvider>();
@@ -85,5 +92,22 @@ public class Program
         app.MapControllers();
 
         app.Run();
+    }
+
+    private static void ValidateGameSection(IConfiguration configuration)
+    {
+        var gameSettings = configuration.GetRequiredSection(EnviromentConstants.GAME_SECTION_NAME)
+            .Get<GameSettings>()!;
+
+        if (gameSettings.Width < 3 || gameSettings.Height < 3 || gameSettings.Width > 10000 || gameSettings.Height > 10000)
+        {
+            throw new EnvironmentConfigurationException(string.Format(MessagesConstants.ENV_WIDTH_HEIGHT_ERROR_MESSAGE_FORMAT, 3, 10000));
+        }
+
+        if (gameSettings.WinLength > gameSettings.Width || gameSettings.WinLength > gameSettings.Height)
+        {
+            throw new EnvironmentConfigurationException(string.Format(MessagesConstants.ENV_WINLENGHT_ERROR_MESSAGE_FORMAT, gameSettings.Width, gameSettings.Height));
+
+        }
     }
 }

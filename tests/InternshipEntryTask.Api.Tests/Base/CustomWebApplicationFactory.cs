@@ -24,6 +24,7 @@ public sealed class CustomWebApplicationFactory : WebApplicationFactory<Program>
         {
             builder.ConfigureAppConfiguration((context, configBuilder) =>
             {
+                configBuilder.Sources.Clear();
                 configBuilder.SetBasePath(Directory.GetCurrentDirectory())
                 .AddJsonFile(FactoryOptions.PathToEnvironment, optional: false, reloadOnChange: false);
             });

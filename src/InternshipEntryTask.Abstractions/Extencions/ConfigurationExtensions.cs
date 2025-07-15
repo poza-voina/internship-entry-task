@@ -22,7 +22,7 @@ public static class ConfigurationExtensions
 
         if (value is null || (value is string s && string.IsNullOrWhiteSpace(s)))
         {
-            throw new EnviromentConfigurationException(string.Format(MessagesConstants.ENVIROMENT_ERROR_MESSAGE_FORMAT, section.Path, key));
+            throw new EnvironmentConfigurationException(string.Format(MessagesConstants.ENVIROMENT_ERROR_MESSAGE_FORMAT, section.Path, key));
         }
 
         return value;

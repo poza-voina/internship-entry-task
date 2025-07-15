@@ -1,4 +1,5 @@
-﻿using InternshipEntryTask.Api.IntegrationTests.Base;
+﻿using FluentAssertions;
+using InternshipEntryTask.Abstractions.Exceptions;
 using InternshipEntryTask.Api.Tests;
 using Xunit;
 
@@ -13,10 +14,9 @@ public class InitializeApplicationTests : ControllerTestsBase
     [Fact]
     public void Initialize_WhenGameEnvironmentSettingsNonValid_ThrowException()
     {
+        Action act = () => CreateIsolatedClient(new() { PathToEnvironment = "TestConfigs/appsettings.invalid.json" });
 
-
-
-
+        act.Should().Throw<EnvironmentConfigurationException>();
     }
 
 }
