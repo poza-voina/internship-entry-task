@@ -1,4 +1,5 @@
-﻿using InternshipEntryTask.Api.Tests.Base;
+﻿using InternshipEntryTask.Api.IntegrationTests.Base;
+using InternshipEntryTask.Api.Tests.Base;
 using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -6,14 +7,14 @@ using Xunit;
 
 namespace InternshipEntryTask.Api.Tests;
 
-public class ControllerTestsBase : IClassFixture<PostgreSqlFixture>
+public abstract class ControllerTestsBase
 {
     private const string SCHEMA_FORMAT = "test_{0}";
-    private readonly PostgreSqlFixture _fixture;
+    protected readonly TestOptions TestOptions;
 
-    public ControllerTestsBase(PostgreSqlFixture fixture)
+    public ControllerTestsBase(TestOptions options)
     {
-        _fixture = fixture;
+        TestOptions = options;
     }
 
     public JsonSerializerOptions DefaultSerializerOptions { get; } = new JsonSerializerOptions
@@ -22,10 +23,26 @@ public class ControllerTestsBase : IClassFixture<PostgreSqlFixture>
         Converters = { new JsonStringEnumConverter(JsonNamingPolicy.CamelCase) }
     };
 
-    public HttpClient CreateIsolatedClient() =>
-        new CustomWebApplicationFactory(_fixture.ConnectionString, NewSchemaName).CreateClient();
-    
-    public StringContent EmptyContent { get; } = 
+    public HttpClient CreateIsolatedClient()
+    {
+        return new CustomWebApplicationFactory(
+            options =>
+            {
+                if (TestOptions.ContainerFixture is { })
+                {
+                    var schemaName = NewSchemaName;
+                    options.ConnectionString = $"{TestOptions.ContainerFixture.ConnectionString};Search Path={schemaName}";
+                    options.DatabaseSchemaName = schemaName;
+                }
+                if (TestOptions.PathToEnvironment is { })
+                {
+                    options.PathToEnvironment = TestOptions.PathToEnvironment;
+                }
+            })
+            .CreateClient();
+    }
+
+    public StringContent EmptyContent { get; } =
         new StringContent(string.Empty, Encoding.UTF8, "application/json");
 
     private string NewSchemaName =>

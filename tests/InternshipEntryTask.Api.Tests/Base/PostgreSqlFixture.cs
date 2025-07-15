@@ -5,7 +5,7 @@ using Xunit;
 
 namespace InternshipEntryTask.Api.Tests.Base;
 
-public class PostgreSqlFixture : IAsyncLifetime
+public class PostgreSqlFixture : IContainerFixture
 {
     private readonly IContainer _container;
 

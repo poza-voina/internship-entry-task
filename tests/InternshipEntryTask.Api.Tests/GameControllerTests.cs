@@ -1,4 +1,5 @@
 ﻿using FluentAssertions;
+using InternshipEntryTask.Api.IntegrationTests;
 using InternshipEntryTask.Api.Tests.Base;
 using InternshipEntryTask.Core.Data.Game;
 using InternshipEntryTask.Infrastructure.Enums;
@@ -8,7 +9,7 @@ using Xunit;
 
 namespace InternshipEntryTask.Api.Tests;
 
-public class GameControllerTests : ControllerTestsBase
+public class GameControllerTests : ControllerTestsBase, IClassFixture<PostgreSqlFixture>
 {
     private const string VERSION = "v1";
     private const string PATH_TO_GAMES = VERSION + "/games";
@@ -18,7 +19,8 @@ public class GameControllerTests : ControllerTestsBase
     private const string ACCESS_KEY_HEADER_KEY = "X-Access-Key";
     private const string JOIN_KEY_HEADER_KEY = "X-Join-Key";
 
-    public GameControllerTests(PostgreSqlFixture fixture) : base(fixture)
+    public GameControllerTests(PostgreSqlFixture fixture) :
+        base(new () { ContainerFixture = fixture})
     {
     }
 

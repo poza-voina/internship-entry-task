@@ -1,28 +1,33 @@
-﻿using InternshipEntryTask.Infrastructure;
+﻿using InternshipEntryTask.Api.IntegrationTests.Base;
+using InternshipEntryTask.Infrastructure;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.VisualStudio.TestPlatform.TestHost;
-using System;
-using Xunit;
 
 namespace InternshipEntryTask.Api.Tests.Base;
 
-public class CustomWebApplicationFactory : WebApplicationFactory<Program>, IDisposable
+public sealed class CustomWebApplicationFactory : WebApplicationFactory<Program>, IDisposable
 {
-    private readonly string _connectionString;
-    private readonly string _schema;
+    private CustomWebApplicationFactoryOptions FactoryOptions { get; set; } = new();
     private bool _disposed = false;
 
-    public CustomWebApplicationFactory(string connectionString, string schema)
+    public CustomWebApplicationFactory(Action<CustomWebApplicationFactoryOptions>? options = null)
     {
-        _schema = schema;
-        _connectionString = $"{connectionString};Search Path={_schema}";
+        options?.Invoke(FactoryOptions);
     }
 
     protected override void ConfigureWebHost(IWebHostBuilder builder)
     {
+        if (FactoryOptions.PathToEnvironment is { })
+        {
+            builder.ConfigureAppConfiguration((context, configBuilder) =>
+            {
+                configBuilder.AddJsonFile(FactoryOptions.PathToEnvironment, optional: false, reloadOnChange: false);
+            });
+        }
+
         builder.ConfigureServices(services =>
         {
             var descriptor = services.SingleOrDefault(
@@ -30,30 +35,33 @@ public class CustomWebApplicationFactory : WebApplicationFactory<Program>, IDisp
             if (descriptor != null)
                 services.Remove(descriptor);
 
-            services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseNpgsql(_connectionString));
-
-            var serviceProvider = services.BuildServiceProvider();
-            ExecuteInScope(context =>
+            if (FactoryOptions.ConnectionString is { } && FactoryOptions.DatabaseSchemaName is { })
             {
-                context.Database.ExecuteSqlRaw($"CREATE SCHEMA IF NOT EXISTS \"{_schema}\"");
-                context.Database.Migrate();
-            }, serviceProvider);
+                services.AddDbContext<ApplicationDbContext>(options =>
+                    options.UseNpgsql(FactoryOptions.ConnectionString));
+
+                var serviceProvider = services.BuildServiceProvider();
+                ExecuteInScope(context =>
+                {
+                    context.Database.ExecuteSqlRaw($"CREATE SCHEMA IF NOT EXISTS \"{FactoryOptions.DatabaseSchemaName}\"");
+                    context.Database.Migrate();
+                }, serviceProvider);
+            }
         });
     }
 
-    public ApplicationDbContext DbContext =>    
+    public ApplicationDbContext DbContext =>
          Services.CreateScope().ServiceProvider.GetRequiredService<ApplicationDbContext>();
 
-    protected override void Dispose(bool disposing)
+    protected override void Dispose(bool disposing) //NOTE проверить будет ли работать удалиние схемы после выполнения теста или нет
     {
         if (!_disposed)
         {
-            if (disposing)
+            if (disposing && FactoryOptions.ConnectionString is { } && FactoryOptions.DatabaseSchemaName is { })
             {
                 ExecuteInScope(context =>
                 {
-                    context.Database.ExecuteSqlRaw($"DROP SCHEMA IF EXISTS \"{_schema}\" CASCADE");
+                    context.Database.ExecuteSqlRaw($"DROP SCHEMA IF EXISTS \"{FactoryOptions.DatabaseSchemaName}\" CASCADE");
                 }); ;
             }
 

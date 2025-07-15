@@ -8,13 +8,17 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <Compile Remove="Comparers\**" />
-	  <EmbeddedResource Remove="Comparers\**" />
-	  <None Remove="Comparers\**" />
-	</ItemGroup>
-
-	<ItemGroup>
-		<Content Include="appsettings.json">
+		<Content Include="appsetting.test.json">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		  <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+		  <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+		</Content>
+		<Content Include="appsettings.invalid.json">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		  <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+		  <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+		</Content>
+		<Content Include="appsettings.test.big.game.json">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 			<ExcludeFromSingleFile>true</ExcludeFromSingleFile>
 			<CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
