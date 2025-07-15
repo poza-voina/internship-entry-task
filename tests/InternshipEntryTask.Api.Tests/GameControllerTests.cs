@@ -20,7 +20,7 @@ public class GameControllerTests(PostgreSqlFixture fixture) : ControllerTestsBas
     private const string ACCESS_KEY_HEADER_KEY = "X-Access-Key";
     private const string JOIN_KEY_HEADER_KEY = "X-Join-Key";
 
-    private IsolatedClientOptions DefaultIsolatedClientOptions { get; } = new() { ContainerFixture = fixture };
+    private IsolatedClientOptions DefaultIsolatedClientOptions { get; } = new() { ContainerFixture = fixture, PathToEnvironment = "TestConfigs/appsettings.test.json" };
 
     [Fact]
     public async Task CreateGame_WhenGameDoesNotExists_ReturnNewGame()
@@ -269,9 +269,16 @@ public class GameControllerTests(PostgreSqlFixture fixture) : ControllerTestsBas
     public async Task Move_WhenPlayGame_ReturnValidGameResultState(GameDto expectedGame, List<MoveRequest> moves, string? appsettings)
     {
         // Arrange
-        var client = CreateIsolatedClient(new() { PathToEnvironment = appsettings, ContainerFixture = fixture });
+        HttpClient client;
+        if (appsettings is { })
+        {
+            client = CreateIsolatedClient(new() { PathToEnvironment = appsettings, ContainerFixture = fixture });
+        } else
+        {
+            client = CreateIsolatedClient(DefaultIsolatedClientOptions);
+        }
 
-        var createGameResponse = await client.PostAsync(PATH_TO_GAMES, EmptyContent);
+            var createGameResponse = await client.PostAsync(PATH_TO_GAMES, EmptyContent);
         var joinkey = (await createGameResponse.Content.ReadFromJsonAsync<GameDto>(DefaultSerializerOptions))!.JoinKey.ToString()!;
 
         var joinRequestFirstPlayer = new HttpRequestBuilder(HttpMethod.Post, PATH_TO_GAME_JOIN)
