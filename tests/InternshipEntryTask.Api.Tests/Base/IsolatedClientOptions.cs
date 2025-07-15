@@ -2,9 +2,8 @@
 
 namespace InternshipEntryTask.Api.IntegrationTests.Base;
 
-public class TestOptions
+public class IsolatedClientOptions
 {
     public string? PathToEnvironment { get; set; }
-    public string? DatabaseSchemaName { get; set; }
     public IContainerFixture? ContainerFixture { get; set; } 
 }

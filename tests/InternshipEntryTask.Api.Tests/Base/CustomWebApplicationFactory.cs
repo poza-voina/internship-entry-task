@@ -24,7 +24,8 @@ public sealed class CustomWebApplicationFactory : WebApplicationFactory<Program>
         {
             builder.ConfigureAppConfiguration((context, configBuilder) =>
             {
-                configBuilder.AddJsonFile(FactoryOptions.PathToEnvironment, optional: false, reloadOnChange: false);
+                configBuilder.SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile(FactoryOptions.PathToEnvironment, optional: false, reloadOnChange: false);
             });
         }
 
@@ -43,9 +44,14 @@ public sealed class CustomWebApplicationFactory : WebApplicationFactory<Program>
                 var serviceProvider = services.BuildServiceProvider();
                 ExecuteInScope(context =>
                 {
-                    context.Database.ExecuteSqlRaw($"CREATE SCHEMA IF NOT EXISTS \"{FactoryOptions.DatabaseSchemaName}\"");
+                    context.Database.ExecuteSqlRaw($"CREATE SCHEMA IF NOT EXISTS \"{FactoryOptions.DatabaseSchemaName}\""); //NOTE: Тестовые схемы. Логика была такая: 1 контейнер один тестовый класс. Для изоляции тестов используются схемы.
                     context.Database.Migrate();
                 }, serviceProvider);
+            } 
+            else //NOTE: подменяет на контекст который ничего не делает. Ну я надеюсь на это. Было интересно можно ли так сделать. Хотел протестировать валидацию некорректных параметров для настроек игры.
+            {
+                services.AddSingleton(new DbContextOptions<ApplicationDbContext>());
+                services.AddScoped<ApplicationDbContext>();
             }
         });
     }
@@ -53,7 +59,7 @@ public sealed class CustomWebApplicationFactory : WebApplicationFactory<Program>
     public ApplicationDbContext DbContext =>
          Services.CreateScope().ServiceProvider.GetRequiredService<ApplicationDbContext>();
 
-    protected override void Dispose(bool disposing) //NOTE проверить будет ли работать удалиние схемы после выполнения теста или нет
+    protected override void Dispose(bool disposing) //TODO: проверить будет ли работать удалиние схемы после выполнения теста или нет
     {
         if (!_disposed)
         {

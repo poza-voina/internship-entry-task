@@ -1,5 +1,6 @@
 ﻿using FluentAssertions;
 using InternshipEntryTask.Api.IntegrationTests;
+using InternshipEntryTask.Api.IntegrationTests.Base;
 using InternshipEntryTask.Api.Tests.Base;
 using InternshipEntryTask.Core.Data.Game;
 using InternshipEntryTask.Infrastructure.Enums;
@@ -9,7 +10,7 @@ using Xunit;
 
 namespace InternshipEntryTask.Api.Tests;
 
-public class GameControllerTests : ControllerTestsBase, IClassFixture<PostgreSqlFixture>
+public class GameControllerTests(PostgreSqlFixture fixture) : ControllerTestsBase, IClassFixture<PostgreSqlFixture>
 {
     private const string VERSION = "v1";
     private const string PATH_TO_GAMES = VERSION + "/games";
@@ -19,16 +20,13 @@ public class GameControllerTests : ControllerTestsBase, IClassFixture<PostgreSql
     private const string ACCESS_KEY_HEADER_KEY = "X-Access-Key";
     private const string JOIN_KEY_HEADER_KEY = "X-Join-Key";
 
-    public GameControllerTests(PostgreSqlFixture fixture) :
-        base(new () { ContainerFixture = fixture})
-    {
-    }
+    private IsolatedClientOptions DefaultIsolatedClientOptions { get; } = new() { ContainerFixture = fixture };
 
     [Fact]
     public async Task CreateGame_WhenGameDoesNotExists_ReturnNewGame()
     {
         // Arrange
-        var client = CreateIsolatedClient();
+        var client = CreateIsolatedClient(DefaultIsolatedClientOptions);
         GameDto expectedData = new GameDto
         {
             Id = 1,
@@ -65,7 +63,7 @@ public class GameControllerTests : ControllerTestsBase, IClassFixture<PostgreSql
     public async Task GetGame_WhenGameExists_ReturnGame()
     {
         // Arrange
-        var client = CreateIsolatedClient();
+        var client = CreateIsolatedClient(DefaultIsolatedClientOptions);
         GameDto expectedData = new GameDto
         {
             Id = 1,
@@ -102,7 +100,7 @@ public class GameControllerTests : ControllerTestsBase, IClassFixture<PostgreSql
     public async Task GetGame_WhenGameNonExists_Return404Error()
     {
         // Arrange
-        var client = CreateIsolatedClient();
+        var client = CreateIsolatedClient(DefaultIsolatedClientOptions);
 
         // Act
         var response = await client.GetAsync(string.Format(PATH_TO_GAME_FORMAT, 1));
@@ -115,7 +113,7 @@ public class GameControllerTests : ControllerTestsBase, IClassFixture<PostgreSql
     public async Task JoinGame_WhenGameExistsAndJoinedTwoPlayers_ReturnOk()
     {
         // Arrange 
-        var client = CreateIsolatedClient();
+        var client = CreateIsolatedClient(DefaultIsolatedClientOptions);
         GameDto expectedData = new GameDto
         {
             Id = 1,
@@ -181,7 +179,7 @@ public class GameControllerTests : ControllerTestsBase, IClassFixture<PostgreSql
     public async Task JoinGame_WhenGameExistsAndJoinedTwoPlayers_ReturnBadRequest()
     {
         // Arrange 
-        var client = CreateIsolatedClient();
+        var client = CreateIsolatedClient(DefaultIsolatedClientOptions);
         GameDto expectedData = new GameDto
         {
             Id = 1,
@@ -223,7 +221,7 @@ public class GameControllerTests : ControllerTestsBase, IClassFixture<PostgreSql
     public async Task Move_WhenMoveOutOfRange_ReturnBadRequest()
     {
         // Arrange
-        var client = CreateIsolatedClient();
+        var client = CreateIsolatedClient(DefaultIsolatedClientOptions);
 
         var incorrectMoves = new List<MoveRequest> {
             new MoveRequest { Row = -1, Column = 0},
@@ -271,7 +269,7 @@ public class GameControllerTests : ControllerTestsBase, IClassFixture<PostgreSql
     public async Task Move_WhenPlayGame_ReturnValidGameResultState(GameDto expectedGame, List<MoveRequest> moves)
     {
         // Arrange
-        var client = CreateIsolatedClient();
+        var client = CreateIsolatedClient(DefaultIsolatedClientOptions);
 
         var createGameResponse = await client.PostAsync(PATH_TO_GAMES, EmptyContent);
         var joinkey = (await createGameResponse.Content.ReadFromJsonAsync<GameDto>(DefaultSerializerOptions))!.JoinKey.ToString()!;

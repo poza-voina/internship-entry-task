@@ -10,11 +10,9 @@ namespace InternshipEntryTask.Api.Tests;
 public abstract class ControllerTestsBase
 {
     private const string SCHEMA_FORMAT = "test_{0}";
-    protected readonly TestOptions TestOptions;
 
-    public ControllerTestsBase(TestOptions options)
+    public ControllerTestsBase()
     {
-        TestOptions = options;
     }
 
     public JsonSerializerOptions DefaultSerializerOptions { get; } = new JsonSerializerOptions
@@ -23,20 +21,20 @@ public abstract class ControllerTestsBase
         Converters = { new JsonStringEnumConverter(JsonNamingPolicy.CamelCase) }
     };
 
-    public HttpClient CreateIsolatedClient()
+    public HttpClient CreateIsolatedClient(IsolatedClientOptions isolatedClientOptions)
     {
         return new CustomWebApplicationFactory(
             options =>
             {
-                if (TestOptions.ContainerFixture is { })
+                if (isolatedClientOptions.ContainerFixture is { })
                 {
                     var schemaName = NewSchemaName;
-                    options.ConnectionString = $"{TestOptions.ContainerFixture.ConnectionString};Search Path={schemaName}";
+                    options.ConnectionString = $"{isolatedClientOptions.ContainerFixture.ConnectionString};Search Path={schemaName}";
                     options.DatabaseSchemaName = schemaName;
                 }
-                if (TestOptions.PathToEnvironment is { })
+                if (isolatedClientOptions.PathToEnvironment is { })
                 {
-                    options.PathToEnvironment = TestOptions.PathToEnvironment;
+                    options.PathToEnvironment = isolatedClientOptions.PathToEnvironment;
                 }
             })
             .CreateClient();
