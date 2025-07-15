@@ -10,11 +10,6 @@ namespace InternshipEntryTask.Infrastructure.Repositories.Interfaces;
 public interface IRepository<TModel> where TModel : class, IDatabaseModel
 {
     /// <summary>
-    /// Контекст БД
-    /// </summary>
-    DbContext Context { get; }
-
-    /// <summary>
     /// Добавить запись в БД
     /// </summary>
     /// <param name="entity">Сущность для добавления</param>

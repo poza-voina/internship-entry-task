@@ -7,6 +7,7 @@ using InternshipEntryTask.Core.Mappers;
 using InternshipEntryTask.Core.Services.Interfaces;
 using InternshipEntryTask.Infrastructure.Enums;
 using InternshipEntryTask.Infrastructure.Models;
+using InternshipEntryTask.Infrastructure.Repositories;
 using InternshipEntryTask.Infrastructure.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -16,8 +17,7 @@ namespace InternshipEntryTask.Core.Services;
 
 /// <inheritdoc/>
 public class GameService(
-    IRepository<GameModel> gameRepository,
-    IRepository<MoveModel> moveRepository,
+    IGameRepository gameRepository,
     IETagService etagService,
     IConfiguration configuration,
     IGameBoardEvaluatorFactory gameBoardFactory)
@@ -119,7 +119,6 @@ public class GameService(
     private async Task<GameDto> ApplyResultAsync(GameModel gameModel, BoardResultDto moveResult, Guid accessKey)
     {
         var move = moveResult.ToMoveModel(accessKey, gameModel.Id);
-        await moveRepository.AddAsync(move);
 
         gameModel.NextMove = moveResult.NextMove;
         if (moveResult.Winner is { })
@@ -127,9 +126,8 @@ public class GameService(
             gameModel.Status = GameStatus.Finished;
         }
         gameModel.Winner = moveResult.Winner;
-        
-        gameModel.Moves.Add(move);
-        await gameRepository.UpdateAsync(gameModel);
+
+        gameModel = await gameRepository.SetGameNewStateAsync(gameModel, move);
 
         return gameModel.ToGameDto();
     }

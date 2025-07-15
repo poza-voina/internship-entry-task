@@ -59,4 +59,9 @@ public class MessagesConstants
     /// Сообщение о неправильном условии выигрыша
     /// </summary>
     public const string ENV_WINLENGHT_ERROR_MESSAGE_FORMAT = "Некорректное условие выигрыша. Текущие размеры Ширина = {0} Высота = {1}";
+
+    /// <summary>
+    /// Не удалось найти сущность
+    /// </summary>
+    public const string CANT_FIND_ENTITY_ERROR_FORMAT = "Не удалось найти сущность с id = {0}";
 }

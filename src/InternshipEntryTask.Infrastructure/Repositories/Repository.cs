@@ -1,4 +1,5 @@
-﻿using InternshipEntryTask.Abstractions.Exceptions;
+﻿using InternshipEntryTask.Abstractions.Constants;
+using InternshipEntryTask.Abstractions.Exceptions;
 using InternshipEntryTask.Infrastructure.Models;
 using InternshipEntryTask.Infrastructure.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
@@ -8,11 +9,6 @@ namespace InternshipEntryTask.Infrastructure.Repositories;
 /// <inheritdoc/>
 public class Repository<TModel>(ApplicationDbContext dbContext) : IRepository<TModel> where TModel : class, IDatabaseModel
 {
-    private const string CANT_FIND_ENTITY_ERROR_FORMAT = "Не удалось найти сущность с id = {0}";
-
-    /// <inheritdoc/>
-    public DbContext Context => dbContext;
-
     /// <inheritdoc/>
     public async Task<TModel> AddAsync(TModel entity, CancellationToken cancellationToken = default)
     {
@@ -97,7 +93,7 @@ public class Repository<TModel>(ApplicationDbContext dbContext) : IRepository<TM
     {
         ArgumentNullException.ThrowIfNull(objects);
         var entity = await dbContext.FindAsync<TModel>(objects)
-            ?? throw new EntityNotFoundException(string.Format(CANT_FIND_ENTITY_ERROR_FORMAT, string.Join(',', objects)));
+            ?? throw new EntityNotFoundException(string.Format(MessagesConstants.CANT_FIND_ENTITY_ERROR_FORMAT, string.Join(',', objects)));
         dbContext.Entry(entity).State = EntityState.Detached;
 
         return entity;

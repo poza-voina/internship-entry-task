@@ -48,6 +48,7 @@ public static class DependencyInjection
     public static void AddRepositories(this IServiceCollection services)
     {
         services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+        services.AddScoped(typeof(IGameRepository), typeof(GameRepository));
     }
 
     /// <summary>
