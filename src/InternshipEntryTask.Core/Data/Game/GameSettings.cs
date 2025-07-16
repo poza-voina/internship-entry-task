@@ -24,4 +24,9 @@ public class GameSettings
     /// Шанс смены значения в ячейке в процентах
     /// </summary>
     public int Chance { get; set; }
+
+    /// <summary>
+    /// Номер хода к которому применяется шанс смены значения на доске
+    /// </summary>
+    public int ChanceTurnNumber { get; set; }
 }
