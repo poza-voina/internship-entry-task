@@ -5,6 +5,7 @@ using InternshipEntryTask.Core.Game.Interfaces;
 using InternshipEntryTask.Infrastructure.Enums;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace InternshipEntryTask.Core.Game;
 
@@ -23,12 +24,12 @@ public class GameBoardEvaluator(BoardDto board) : IGameBoardEvaluator
 	{
 		if (Board.Row < 0 || Board.Column < 0 || Board.Row >= Board.GameSettings.Height || Board.Column >= Board.GameSettings.Width)
 		{
-			throw new BaseGameException(MessagesConstants.BOARD_OUT_OF_RANGE_ERROR_MESSAGE);
+			throw new ValidationException(MessagesConstants.BOARD_OUT_OF_RANGE_ERROR_MESSAGE);
 		}
 
 		if (Board.Moves.Any(x => x.Column == Board.Column && x.Row == Board.Row))
 		{
-			throw new BaseGameException(string.Format(MessagesConstants.MOVE_ALREADY_EXISTS_MESSAGE_FORMAT_ERROR_MESSAGE, Board.Column, Board.Row));
+			throw new ConflictException(string.Format(MessagesConstants.MOVE_ALREADY_EXISTS_MESSAGE_FORMAT_ERROR_MESSAGE, Board.Column, Board.Row));
 		}
 
 		_groupedMoves = Board.Moves.ToDictionary(x => (x.Column, x.Row), x => x.CellValue);

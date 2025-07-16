@@ -12,6 +12,7 @@ using InternshipEntryTask.Infrastructure.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace InternshipEntryTask.Core.Services;
 
@@ -65,7 +66,7 @@ public class GameService(
     {
         var model = await gameRepository.GetAll()
             .FirstOrDefaultAsync(x => x.JoinKey == joinKey)
-            ?? throw new EntityNotFoundException(string.Format(MessagesConstants.GAME_NOTFOUND_ERROR_MESSAGE_FORMAT, joinKey));
+            ?? throw new EntityNotFoundException(string.Format(MessagesConstants.GAME_NOTFOUND_WITH_JOIN_KEY_ERROR_MESSAGE, joinKey));
 
         var accessKey = Guid.NewGuid();
         switch (request.PlayerSymbol)
@@ -73,7 +74,7 @@ public class GameService(
             case CellValue.X:
                 if (model.AccessKeyPlayerX is { })
                 {
-                    throw new BaseGameException(MessagesConstants.PLAYER_X_ALREADY_EXISTS_MESSAGE);
+                    throw new ConflictException(MessagesConstants.PLAYER_X_ALREADY_EXISTS_MESSAGE);
                 }
                 model.AccessKeyPlayerX = accessKey;
                 break;
@@ -81,7 +82,7 @@ public class GameService(
             case CellValue.O:
                 if (model.AccessKeyPlayerO is { })
                 {
-                    throw new BaseGameException(MessagesConstants.PLAYER_O_ALREADY_EXISTS_MESSAGE);
+                    throw new ConflictException(MessagesConstants.PLAYER_O_ALREADY_EXISTS_MESSAGE);
                 }
                 model.AccessKeyPlayerO = accessKey;
                 break;
@@ -177,7 +178,7 @@ public class GameService(
 
         if (!isCurrentPlayerMove)
         {
-            throw new BaseGameException(MessagesConstants.NOT_YOUR_TURN_ERROR_MESSAGE);
+            throw new ValidationException(MessagesConstants.NOT_YOUR_TURN_ERROR_MESSAGE);
         }
     }
     
@@ -185,7 +186,7 @@ public class GameService(
     {
         if (gameModel.Status == GameStatus.Finished)
         {
-            throw new BaseGameException(MessagesConstants.GAME_IS_FINISHED_ERROR_MESSAGE);
+            throw new UnprocessableException(MessagesConstants.GAME_IS_FINISHED_ERROR_MESSAGE);
         }
     }
 }

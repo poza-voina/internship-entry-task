@@ -214,7 +214,7 @@ public class GameControllerTests(PostgreSqlFixture fixture) : ControllerTestsBas
         var secondActualData = await secondJoinGameResponse.Content.ReadFromJsonAsync<GameDto>(DefaultSerializerOptions);
 
         // Assert
-        secondJoinGameResponse.StatusCode.Should().Be(HttpStatusCode.BadRequest);
+        secondJoinGameResponse.StatusCode.Should().Be(HttpStatusCode.Conflict);
     }
 
     [Fact]

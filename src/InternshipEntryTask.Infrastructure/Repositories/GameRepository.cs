@@ -31,7 +31,7 @@ public class GameRepository : Repository<GameModel>, IGameRepository
 
 		var updatedGame = await _dbContext.Set<GameModel>()
 			.Include(g => g.Moves)
-			.FirstOrDefaultAsync(g => g.Id == gameModel.Id) ?? throw new EntityNotFoundException(MessagesConstants.GAME_NOTFOUND_ERROR_MESSAGE_FORMAT);
+			.FirstOrDefaultAsync(g => g.Id == gameModel.Id) ?? throw new EntityNotFoundException(MessagesConstants.GAME_NOT_FOUND_WITH_ACCESSKEY_ERROR_MESSAGE);
 
 		return updatedGame;
 	}

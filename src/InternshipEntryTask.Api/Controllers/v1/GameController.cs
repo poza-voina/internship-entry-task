@@ -23,7 +23,8 @@ public class GameController(IGameService gameService, IETagService etagService) 
     /// <param name="showBoard">Флаг определяющий, следует ли отображать игровую доску</param>
     /// <returns>Объект игры</returns>
     [HttpGet("{gameId:long}")]
-    [ProducesResponseType(typeof(GameDto), (int)HttpStatusCode.OK)]
+    [ProducesResponseType(typeof(GameDto), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status404NotFound)]
     public async Task<IResult> GetGame(
         [FromRoute] long gameId,
         [FromHeader(Name = "Show-Board")] bool showBoard = false)
@@ -38,7 +39,7 @@ public class GameController(IGameService gameService, IETagService etagService) 
     /// </summary>
     /// <returns>Объект игры</returns>
     [HttpPost]
-    [ProducesResponseType(typeof(GameDto), (int)HttpStatusCode.OK)]
+    [ProducesResponseType(typeof(GameDto), StatusCodes.Status200OK)]
     public async Task<IResult> CreateGame()
     {
         GameDto result = await gameService.CreateGameAsync();
@@ -53,7 +54,9 @@ public class GameController(IGameService gameService, IETagService etagService) 
     /// <param name="joinKey">Ключ, используемый для присоедининения к игре</param>
     /// <returns>Объект игры</returns>
     [HttpPost("join")]
-    [ProducesResponseType(typeof(GameDto), (int)HttpStatusCode.OK)]
+    [ProducesResponseType(typeof(GameDto), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status404NotFound)]
+    [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status409Conflict)]
     public async Task<IResult> JoinGame(
         [FromBody] JoinRequest request,
         [FromHeader(Name = "X-Join-Key")] [Required] Guid joinKey)
@@ -73,6 +76,10 @@ public class GameController(IGameService gameService, IETagService etagService) 
     /// <returns>Объект игр</returns>
     [HttpPost("{gameId:long}/move")]
     [ProducesResponseType(typeof(GameDto), (int)HttpStatusCode.OK)]
+    [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status404NotFound)]
+    [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status422UnprocessableEntity)]
+    [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status409Conflict)]
     public async Task<IResult> Move(
         [FromBody] MoveRequest moveRequest,
         [FromRoute] long gameId,

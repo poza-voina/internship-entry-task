@@ -7,6 +7,7 @@ using Xunit;
 using InternshipEntryTask.Infrastructure.Models;
 using FluentAssertions;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Query.ExpressionTranslators.Internal;
+using System.ComponentModel.DataAnnotations;
 
 namespace InternshipEntryTask.Core.UnitTests;
 
@@ -32,7 +33,7 @@ public class GameBoardEvaluatorTests
 
         // Assert
         act.Should()
-           .Throw<BaseGameException>()
+           .Throw<ValidationException>()
            .WithMessage(MessagesConstants.BOARD_OUT_OF_RANGE_ERROR_MESSAGE);
     }
 
@@ -56,7 +57,7 @@ public class GameBoardEvaluatorTests
 
         // Assert
         act.Should()
-           .Throw<BaseGameException>();
+           .Throw<ConflictException>();
     }
 
     [Fact]

@@ -8,7 +8,12 @@ public class MessagesConstants
     /// <summary>
     /// Формат сообщения "Игра не найдена"
     /// </summary>
-    public const string GAME_NOTFOUND_ERROR_MESSAGE_FORMAT = "Игра с JoinKey = {0} не найдена";
+    public const string GAME_NOTFOUND_ERROR_MESSAGE_FORMAT = "Игра с Id = {0} не найдена";
+
+    /// <summary>
+    /// Формат сообщения "Игра не найдена"
+    /// </summary>
+    public const string GAME_NOTFOUND_WITH_JOIN_KEY_ERROR_MESSAGE = "Игра не найдена для указанного ключа присоединия";
 
     /// <summary>
     /// Сообщение "Игра не найдена"

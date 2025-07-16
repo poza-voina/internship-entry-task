@@ -25,18 +25,18 @@ public class Program
 
         services.AddOpenApi();
         services.AddEndpointsApiExplorer();
-        services.AddSwaggerGen(c =>
+        services.AddSwaggerGen(x =>
         {
             var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
             var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
 
-            c.IncludeXmlComments(xmlPath);
+            x.IncludeXmlComments(xmlPath);
 
             var coreXmlFile = $"{typeof(GameDto).Assembly.GetName().Name}.xml";
             var coreXmlPath = Path.Combine(AppContext.BaseDirectory, coreXmlFile);
 
-            c.IncludeXmlComments(xmlPath);
-            c.IncludeXmlComments(coreXmlPath);
+            x.IncludeXmlComments(xmlPath);
+            x.IncludeXmlComments(coreXmlPath);
         });
 
         services.AddApplicationDbContext(configuration);
@@ -88,7 +88,6 @@ public class Program
         }
 
         app.UseExceptionHandler();
-        app.UseHttpsRedirection();
         app.UseSwagger();
 
         app.UseSwaggerUI(options =>
