@@ -273,12 +273,13 @@ public class GameControllerTests(PostgreSqlFixture fixture) : ControllerTestsBas
         if (appsettings is { })
         {
             client = CreateIsolatedClient(new() { PathToEnvironment = appsettings, ContainerFixture = fixture });
-        } else
+        }
+        else
         {
             client = CreateIsolatedClient(DefaultIsolatedClientOptions);
         }
 
-            var createGameResponse = await client.PostAsync(PATH_TO_GAMES, EmptyContent);
+        var createGameResponse = await client.PostAsync(PATH_TO_GAMES, EmptyContent);
         var joinkey = (await createGameResponse.Content.ReadFromJsonAsync<GameDto>(DefaultSerializerOptions))!.JoinKey.ToString()!;
 
         var joinRequestFirstPlayer = new HttpRequestBuilder(HttpMethod.Post, PATH_TO_GAME_JOIN)
@@ -330,8 +331,40 @@ public class GameControllerTests(PostgreSqlFixture fixture) : ControllerTestsBas
 
     public class GameMovesData : TheoryData<GameDto, List<MoveRequest>, string?>
     {
+        public record MovePosition
+        {
+            public int Row { get; set; }
+            public int Column { get; set; }
+
+            public static List<MoveRequest> ToMoveRequests(List<MovePosition> movePositions)
+            {
+                return movePositions.Select(x => new MoveRequest { Row = x.Row, Column = x.Column }).ToList();
+            }
+
+            public static List<MoveDto> ToGameMoves(List<MovePosition> movePositions)
+            {
+                return movePositions.Select(
+                    (x, index) => new MoveDto
+                    {
+                        Row = x.Row,
+                        Column = x.Column,
+                        CellValue = index % 2 == 0 ? CellValue.X : CellValue.O
+                    }).ToList();
+            }
+        }
+
         public GameMovesData()
         {
+
+            var moves = new List<MovePosition>
+                {
+                    new MovePosition {Row = 0, Column = 0},
+                    new MovePosition {Row = 1, Column = 0},
+                    new MovePosition {Row = 0, Column = 1},
+                    new MovePosition {Row = 1, Column = 1},
+                    new MovePosition {Row = 0, Column = 2},
+                };
+
             Add(
                 new GameDto
                 {
@@ -343,18 +376,20 @@ public class GameControllerTests(PostgreSqlFixture fixture) : ControllerTestsBas
                     Height = 3,
                     JoinKey = null,
                     AccessKey = null,
+                    Moves = MovePosition.ToGameMoves(moves)
                 },
-
-                new List<MoveRequest>
-                {
-                    new MoveRequest {Row = 0, Column = 0},
-                    new MoveRequest {Row = 1, Column = 0},
-                    new MoveRequest {Row = 0, Column = 1},
-                    new MoveRequest {Row = 1, Column = 1},
-                    new MoveRequest {Row = 0, Column = 2},
-                },
+                MovePosition.ToMoveRequests(moves),
                 null);
 
+            moves = new List<MovePosition>
+                {
+                    new MovePosition { Row = 0, Column = 0 },
+                    new MovePosition { Row = 0, Column = 1 },
+                    new MovePosition { Row = 1, Column = 0 },
+                    new MovePosition { Row = 1, Column = 1 },
+                    new MovePosition { Row = 2, Column = 2 },
+                    new MovePosition { Row = 2, Column = 1 },
+                };
 
             Add(
                 new GameDto
@@ -367,17 +402,23 @@ public class GameControllerTests(PostgreSqlFixture fixture) : ControllerTestsBas
                     Height = 3,
                     JoinKey = null,
                     AccessKey = null,
+                    Moves = MovePosition.ToGameMoves(moves)
                 },
-                new List<MoveRequest>
-                {
-                    new MoveRequest { Row = 0, Column = 0 },
-                    new MoveRequest { Row = 0, Column = 1 },
-                    new MoveRequest { Row = 1, Column = 0 },
-                    new MoveRequest { Row = 1, Column = 1 },
-                    new MoveRequest { Row = 2, Column = 2 },
-                    new MoveRequest { Row = 2, Column = 1 },
-                },
+                MovePosition.ToMoveRequests(moves),
                 null);
+
+            moves = new List<MovePosition>()
+                {
+                    new MovePosition { Row = 0, Column = 0 },
+                    new MovePosition { Row = 0, Column = 1 },
+                    new MovePosition { Row = 0, Column = 2 },
+                    new MovePosition { Row = 1, Column = 1 },
+                    new MovePosition { Row = 1, Column = 0 },
+                    new MovePosition { Row = 1, Column = 2 },
+                    new MovePosition { Row = 2, Column = 1 },
+                    new MovePosition { Row = 2, Column = 0 },
+                    new MovePosition { Row = 2, Column = 2 },
+                };
 
             Add(
                 new GameDto
@@ -390,21 +431,20 @@ public class GameControllerTests(PostgreSqlFixture fixture) : ControllerTestsBas
                     Height = 3,
                     JoinKey = null,
                     AccessKey = null,
+                    Moves = MovePosition.ToGameMoves(moves)
                 },
-                new List<MoveRequest>
-                {
-                    new MoveRequest { Row = 0, Column = 0 },
-                    new MoveRequest { Row = 0, Column = 1 },
-                    new MoveRequest { Row = 0, Column = 2 },
-                    new MoveRequest { Row = 1, Column = 1 },
-                    new MoveRequest { Row = 1, Column = 0 },
-                    new MoveRequest { Row = 1, Column = 2 },
-                    new MoveRequest { Row = 2, Column = 1 },
-                    new MoveRequest { Row = 2, Column = 0 },
-                    new MoveRequest { Row = 2, Column = 2 },
-                },
+                MovePosition.ToMoveRequests(moves),
                 null
             );
+
+            moves = new List<MovePosition>
+                {
+                    new MovePosition { Row = 10, Column = 9 },
+                    new MovePosition { Row = 5,  Column = 5 },
+                    new MovePosition { Row = 10, Column = 10 },
+                    new MovePosition { Row = 6,  Column = 5 },
+                    new MovePosition { Row = 10, Column = 11 }
+                };
 
             Add(
                 new GameDto
@@ -416,16 +456,11 @@ public class GameControllerTests(PostgreSqlFixture fixture) : ControllerTestsBas
                     Width = 20,
                     Height = 20,
                     JoinKey = null,
-                    AccessKey = null
+                    AccessKey = null,
+                    Moves = MovePosition.ToGameMoves(moves)
                 },
-                new List<MoveRequest>
-                {
-                    new MoveRequest { Row = 10, Column = 9 },
-                    new MoveRequest { Row = 5,  Column = 5 },
-                    new MoveRequest { Row = 10, Column = 10 },
-                    new MoveRequest { Row = 6,  Column = 5 },
-                    new MoveRequest { Row = 10, Column = 11 }
-                }, "TestConfigs/appsettings.test.big.game.json");
+                MovePosition.ToMoveRequests(moves),
+                "TestConfigs/appsettings.test.big.game.json");
         }
     }
 }

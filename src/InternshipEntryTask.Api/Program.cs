@@ -39,6 +39,10 @@ public class Program
         builder.AddSerilog();
         services.AddExceptionHandler<ExceptionHandler>();
         services.AddMemoryCache();
+        services.Configure<ApiBehaviorOptions>(options =>
+        {
+            options.SuppressModelStateInvalidFilter = false;
+        });
 
         builder.Services.AddApiVersioning(options =>
         {
@@ -59,6 +63,7 @@ public class Program
             {
                 options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
                 options.JsonSerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull;
+                options.JsonSerializerOptions.UnmappedMemberHandling = JsonUnmappedMemberHandling.Disallow;
             });
 
         services.ConfigureHttpJsonOptions(options =>

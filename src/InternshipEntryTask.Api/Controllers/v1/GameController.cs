@@ -1,6 +1,7 @@
 ﻿using InternshipEntryTask.Core.Data.Game;
 using InternshipEntryTask.Core.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel.DataAnnotations;
 using System.Net;
 
 namespace InternshipEntryTask.Api.Controllers.v1;
@@ -25,7 +26,7 @@ public class GameController(IGameService gameService, IETagService etagService) 
     [ProducesResponseType(typeof(GameDto), (int)HttpStatusCode.OK)]
     public async Task<IResult> GetGame(
         [FromRoute] long gameId,
-        [FromHeader(Name = "Show-Board")] bool showBoard)
+        [FromHeader(Name = "Show-Board")] bool showBoard = false)
     {
         GameDto result = await gameService.GetGameAsync(gameId, showBoard);
 
@@ -53,7 +54,9 @@ public class GameController(IGameService gameService, IETagService etagService) 
     /// <returns>Объект игры <see cref="GameDto"/></returns>
     [HttpPost("join")]
     [ProducesResponseType(typeof(GameDto), (int)HttpStatusCode.OK)]
-    public async Task<IResult> JoinGame([FromBody] JoinRequest request, [FromHeader(Name = "X-Join-Key")] Guid joinKey)
+    public async Task<IResult> JoinGame(
+        [FromBody] JoinRequest request,
+        [FromHeader(Name = "X-Join-Key")] [Required] Guid joinKey)
     {
         var result = await gameService.JoinGameAsync(request, joinKey);
 
@@ -73,8 +76,9 @@ public class GameController(IGameService gameService, IETagService etagService) 
     public async Task<IResult> Move(
         [FromBody] MoveRequest moveRequest,
         [FromRoute] long gameId,
-        [FromHeader(Name = "X-Access-Key")] Guid accessKey,
-        [FromHeader(Name = "Show-Board")] bool showBoard)
+        [FromHeader(Name = "X-Access-Key")] [Required] Guid accessKey,
+        [FromHeader(Name = "Show-Board")]
+        bool showBoard = false)
     {
         if (etagService.Check(gameId, accessKey, moveRequest, out var etag))
         {
