@@ -45,7 +45,9 @@ public sealed class CustomWebApplicationFactory : WebApplicationFactory<Program>
                 var serviceProvider = services.BuildServiceProvider();
                 ExecuteInScope(context =>
                 {
+#pragma warning disable
                     context.Database.ExecuteSqlRaw($"CREATE SCHEMA IF NOT EXISTS \"{FactoryOptions.DatabaseSchemaName}\""); //NOTE: Тестовые схемы. Логика была такая: 1 контейнер один тестовый класс. Для изоляции тестов используются схемы.
+#pragma warning restore                    
                     context.Database.Migrate();
                 }, serviceProvider);
             } 
@@ -68,7 +70,9 @@ public sealed class CustomWebApplicationFactory : WebApplicationFactory<Program>
             {
                 ExecuteInScope(context =>
                 {
+#pragma warning disable
                     context.Database.ExecuteSqlRaw($"DROP SCHEMA IF EXISTS \"{FactoryOptions.DatabaseSchemaName}\" CASCADE");
+#pragma warning restore
                 }); ;
             }
 
