@@ -29,7 +29,14 @@ public class Program
         {
             var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
             var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+
             c.IncludeXmlComments(xmlPath);
+
+            var coreXmlFile = $"{typeof(GameDto).Assembly.GetName().Name}.xml";
+            var coreXmlPath = Path.Combine(AppContext.BaseDirectory, coreXmlFile);
+
+            c.IncludeXmlComments(xmlPath);
+            c.IncludeXmlComments(coreXmlPath);
         });
 
         services.AddApplicationDbContext(configuration);
