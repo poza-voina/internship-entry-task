@@ -109,10 +109,14 @@ public class Program
             throw new EnvironmentConfigurationException(string.Format(MessagesConstants.ENV_WIDTH_HEIGHT_ERROR_MESSAGE_FORMAT, 3, 10000));
         }
 
-        if (gameSettings.WinLength > gameSettings.Width || gameSettings.WinLength > gameSettings.Height)
+        if (gameSettings.WinLength > gameSettings.Width || gameSettings.WinLength > gameSettings.Height || gameSettings.WinLength < 1)
         {
             throw new EnvironmentConfigurationException(string.Format(MessagesConstants.ENV_WINLENGHT_ERROR_MESSAGE_FORMAT, gameSettings.Width, gameSettings.Height));
+        }
 
+        if (gameSettings.ChanceTurnNumber < 1)
+        {
+            throw new EnvironmentConfigurationException(MessagesConstants.ENV_CHANCETURNNUMBER_ERROR_MESSAGE);
         }
     }
 }

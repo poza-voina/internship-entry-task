@@ -61,6 +61,11 @@ public class MessagesConstants
     public const string ENV_WINLENGHT_ERROR_MESSAGE_FORMAT = "Некорректное условие выигрыша. Текущие размеры Ширина = {0} Высота = {1}";
 
     /// <summary>
+    /// Сообщение о некорректный номере хода для смены значения
+    /// </summary>
+    public const string ENV_CHANCETURNNUMBER_ERROR_MESSAGE = "Некорректный номер хода для смены значения. Значение должно быть больше 0";
+
+    /// <summary>
     /// Не удалось найти сущность
     /// </summary>
     public const string CANT_FIND_ENTITY_ERROR_FORMAT = "Не удалось найти сущность с id = {0}";
