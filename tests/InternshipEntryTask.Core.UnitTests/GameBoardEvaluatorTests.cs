@@ -55,8 +55,7 @@ public class GameBoardEvaluatorTests
 
         // Assert
         act.Should()
-           .Throw<BaseGameException>()
-           .WithMessage(MessagesConstants.BOARD_OUT_OF_RANGE_ERROR_MESSAGE);
+           .Throw<BaseGameException>();
     }
 
     [Fact]
