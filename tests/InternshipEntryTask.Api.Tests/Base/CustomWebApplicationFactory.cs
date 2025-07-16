@@ -51,7 +51,7 @@ public sealed class CustomWebApplicationFactory : WebApplicationFactory<Program>
                     context.Database.Migrate();
                 }, serviceProvider);
             } 
-            else //NOTE: подменяет на контекст который ничего не делает. Ну я надеюсь на это. Было интересно можно ли так сделать. Хотел протестировать валидацию некорректных параметров для настроек игры.
+            else
             {
                 services.AddSingleton(new DbContextOptions<ApplicationDbContext>());
                 services.AddScoped<ApplicationDbContext>();
