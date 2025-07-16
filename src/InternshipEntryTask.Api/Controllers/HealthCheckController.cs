@@ -13,7 +13,7 @@ public class HealthCheckController : ControllerBase
 {
 
     /// <summary>
-    /// Обработывает здоровье API
+    /// Проверяет состояние работоспособности API.
     /// </summary>
     /// <returns>200</returns>
     [HttpGet("/health")]

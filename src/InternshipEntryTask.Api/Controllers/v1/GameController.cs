@@ -20,8 +20,8 @@ public class GameController(IGameService gameService, IETagService etagService) 
     /// Получает игру по идентификатору
     /// </summary>
     /// <param name="gameId">Идентификатор игры</param>
-    /// <param name="showBoard">Флаг показывать доску или нет</param>
-    /// <returns>Объект игры <see cref="GameDto"/></returns>
+    /// <param name="showBoard">Флаг определяющий, следует ли отображать игровую доску</param>
+    /// <returns>Объект игры</returns>
     [HttpGet("{gameId:long}")]
     [ProducesResponseType(typeof(GameDto), (int)HttpStatusCode.OK)]
     public async Task<IResult> GetGame(
@@ -34,9 +34,9 @@ public class GameController(IGameService gameService, IETagService etagService) 
     }
 
     /// <summary>
-    /// Создает игру JOINKEY НУЖНО ЗАПОМИНАТЬ!
+    /// Создает игру
     /// </summary>
-    /// <returns>Объект игры <see cref="GameDto"/></returns>
+    /// <returns>Объект игры</returns>
     [HttpPost]
     [ProducesResponseType(typeof(GameDto), (int)HttpStatusCode.OK)]
     public async Task<IResult> CreateGame()
@@ -49,9 +49,9 @@ public class GameController(IGameService gameService, IETagService etagService) 
     /// <summary>
     /// Присоединиться к игре
     /// </summary>
-    /// <param name="request">Запрос на присоединение <see cref="JoinRequest"/></param>
-    /// <param name="joinKey">Ключ присоединения</param>
-    /// <returns>Объект игры <see cref="GameDto"/></returns>
+    /// <param name="request">Запрос на присоединени</param>
+    /// <param name="joinKey">Ключ, используемый для присоедининения к игре</param>
+    /// <returns>Объект игры</returns>
     [HttpPost("join")]
     [ProducesResponseType(typeof(GameDto), (int)HttpStatusCode.OK)]
     public async Task<IResult> JoinGame(
@@ -66,11 +66,11 @@ public class GameController(IGameService gameService, IETagService etagService) 
     /// <summary>
     /// Сделать ход
     /// </summary>
-    /// <param name="moveRequest">Запрос на создание хода <see cref="MoveRequest"/></param>
+    /// <param name="moveRequest">Запрос на создание хода</param>
     /// <param name="gameId">Идентификатор игры</param>
     /// <param name="accessKey">Ключ авторизации</param>
-    /// <param name="showBoard">Флаг, показывать доску или нет</param>
-    /// <returns>Объект игры <see cref="GameDto"/></returns>
+    /// <param name="showBoard">Флаг определяющий, следует ли отображать игровую доску</param>
+    /// <returns>Объект игр</returns>
     [HttpPost("{gameId:long}/move")]
     [ProducesResponseType(typeof(GameDto), (int)HttpStatusCode.OK)]
     public async Task<IResult> Move(
