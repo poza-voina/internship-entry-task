@@ -14,6 +14,8 @@ docker compose up -d --build
 
 **Работающее приложение:** http://localhost:8080/swagger/index.html
 
+**Для проверки работы можно воспользоваться:** [Postman](./InternshipEntryTask.Api.postman_collection.json)
+
 **Запуск тестов:** 
 ```
 dotnet test
