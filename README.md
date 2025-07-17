@@ -1,20 +1,40 @@
 # Описание проекта
 
-Это REST API для игры в крестики-нолики, реализованное на платформе .NET.
+Это REST API для игры в крестики-нолики, реализованное на платформе .NET
 
 ## Условия игры
 
-1. Играют два игрока.
-2. Каждый третий ход существует вероятность 10%, что поставленный игроком символ будет заменён на символ противника.
+1. Играют два игрока
+2. Каждый третий ход существует вероятность 10%, что поставленный игроком символ будет заменён на символ противника
 
 # Сценарий использования
-POST /api/v1/game -> запомнить joinKey
-POST /api/v1/game/join -> запомнить accessKey
+[Описание API](docs/api.md)
+
+Создать игру:
+- [POST /api/v1/game (запомнить joinKey)](https://github.com/poza-voina/internship-entry-task/blob/main/docs/api.md#post__v1_games)
+
+Присоединиться к игре:
+- [POST /api/v1/game/join (запомнить accessKey)](https://github.com/poza-voina/internship-entry-task/blob/main/docs/api.md#post__v1_games_join)  
+
+Делать ходы:
+- [POST /api/v1/game/{id}/move](https://github.com/poza-voina/internship-entry-task/blob/main/docs/api.md#post__v1_games_gameid_move)
 
 Чтобы посмотреть на доску в виде двумерного массива нужно передавать заголовок X-ShowBoard
 
-
 ## Архитектура
+
+### Набор технологий
+
+- .NET Core
+- ASP.Net Core
+- Swashbuckle.AspNetCore
+- Serilog
+- Ef Core
+- Postgres
+- xunit
+- FluentAssertions
+- coverlet.collector
+- Testcontainers
 
 Проект построен на основе слоистой архитектуры и состоит из следующих сборок:
 
@@ -39,6 +59,10 @@ POST /api/v1/game/join -> запомнить accessKey
 - Контекст Entity Framework Core;
 - Конфигурации моделей;
 - Репозитории и взаимодействие с БД.
+
+### 3. `InternshipEntryTask.Abstractions`
+
+Хранит константы, которые используются во всем приложении
 
 ## Тестирование
 
