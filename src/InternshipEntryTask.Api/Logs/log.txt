@@ -56,3 +56,10 @@ WHERE id = @p9;
 2025-07-15 18:03:14.260 +03:00 [INF] Executed action InternshipEntryTask.Api.Controllers.v1.GameController.Move (InternshipEntryTask.Api) in 175.995ms
 2025-07-15 18:03:14.263 +03:00 [INF] Executed endpoint 'InternshipEntryTask.Api.Controllers.v1.GameController.Move (InternshipEntryTask.Api)'
 2025-07-15 18:03:14.265 +03:00 [INF] Request finished HTTP/2 POST https://localhost:7071/v1/games/53/move - 200 null application/json; charset=utf-8 225.8227ms
+2025-07-17 10:00:06.674 +03:00 [INF] Now listening on: https://localhost:7071
+2025-07-17 10:00:06.699 +03:00 [INF] Now listening on: http://localhost:5205
+2025-07-17 10:00:06.766 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-07-17 10:00:06.767 +03:00 [INF] Hosting environment: Development
+2025-07-17 10:00:06.767 +03:00 [INF] Content root path: E:\projects\entry\internship-entry-task\src\InternshipEntryTask.Api
+2025-07-17 10:00:09.864 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5205/swagger/v1/swagger.yaml - null null
+2025-07-17 10:00:10.203 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5205/swagger/v1/swagger.yaml - 200 null text/yaml;charset=utf-8 343.4141ms
