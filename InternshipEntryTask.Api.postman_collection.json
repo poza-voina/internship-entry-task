@@ -1,0 +1,1200 @@
+{
+	"info": {
+		"_postman_id": "7a5f385d-f3a0-4308-b1a8-cb73ad1100d9",
+		"name": "InternshipEntryTask.Api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "27661032"
+	},
+	"item": [
+		{
+			"name": "health",
+			"item": [
+				{
+					"name": "Проверяет состояние работоспособности API.",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/health",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"health"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "OK",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/health",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"health"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Создает игру",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "{{baseUrl}}/v1/games",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"v1",
+						"games"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "OK",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/v1/games",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"games"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n  \"id\": 51349071,\n  \"nextMove\": \"O\",\n  \"status\": \"Progress\",\n  \"winner\": \"Draw\",\n  \"width\": 31975593,\n  \"height\": 99428979,\n  \"joinKey\": \"6a533751-d7ee-d35d-baf2-6f47da3d2ced\",\n  \"accessKey\": \"urn:uuid:7e79556e-edfa-5131-9607-a4e1ee15edc2\",\n  \"board\": [\n    [\n      \"nulla\",\n      \"occaecat magna sunt enim\"\n    ],\n    [\n      \"ut mollit enim\",\n      \"minim\"\n    ]\n  ],\n  \"moves\": [\n    {\n      \"row\": 78188286,\n      \"column\": 22882588,\n      \"cellValue\": \"O\"\n    },\n    {\n      \"row\": 95887395,\n      \"column\": 84362045,\n      \"cellValue\": \"O\"\n    }\n  ]\n}"
+				}
+			]
+		},
+		{
+			"name": "Получает игру по идентификатору",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Show-Board",
+						"value": "false",
+						"description": "Флаг определяющий, следует ли отображать игровую доску"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "{{baseUrl}}/v1/games/:gameId",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"v1",
+						"games",
+						":gameId"
+					],
+					"variable": [
+						{
+							"key": "gameId",
+							"value": "90876744",
+							"description": "(Required) Идентификатор игры"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "OK",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Show-Board",
+								"value": "false",
+								"description": "Флаг определяющий, следует ли отображать игровую доску"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/v1/games/:gameId",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"games",
+								":gameId"
+							],
+							"variable": [
+								{
+									"key": "gameId"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n  \"id\": 51349071,\n  \"nextMove\": \"O\",\n  \"status\": \"Progress\",\n  \"winner\": \"Draw\",\n  \"width\": 31975593,\n  \"height\": 99428979,\n  \"joinKey\": \"6a533751-d7ee-d35d-baf2-6f47da3d2ced\",\n  \"accessKey\": \"urn:uuid:7e79556e-edfa-5131-9607-a4e1ee15edc2\",\n  \"board\": [\n    [\n      \"nulla\",\n      \"occaecat magna sunt enim\"\n    ],\n    [\n      \"ut mollit enim\",\n      \"minim\"\n    ]\n  ],\n  \"moves\": [\n    {\n      \"row\": 78188286,\n      \"column\": 22882588,\n      \"cellValue\": \"O\"\n    },\n    {\n      \"row\": 95887395,\n      \"column\": 84362045,\n      \"cellValue\": \"O\"\n    }\n  ]\n}"
+				},
+				{
+					"name": "Not Found",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Show-Board",
+								"value": "false",
+								"description": "Флаг определяющий, следует ли отображать игровую доску"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/v1/games/:gameId",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"games",
+								":gameId"
+							],
+							"variable": [
+								{
+									"key": "gameId"
+								}
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n  \"type\": \"dolore sunt nisi cillum\",\n  \"title\": \"anim sint Duis\",\n  \"status\": 30489869,\n  \"detail\": \"amet\",\n  \"instance\": \"in veniam laborum\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Присоединиться к игре",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-Join-Key",
+						"value": "9324b0bd-b718-382a-e541-155b4ab9311b",
+						"description": "(Required) Ключ, используемый для присоедининения к игре"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"playerSymbol\": \"O\"\n}",
+					"options": {
+						"raw": {
+							"headerFamily": "json",
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/v1/games/join",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"v1",
+						"games",
+						"join"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "OK",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Join-Key",
+								"value": "9324b0bd-b718-382a-e541-155b4ab9311b",
+								"description": "(Required) Ключ, используемый для присоедининения к игре"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"playerSymbol\": \"O\"\n}",
+							"options": {
+								"raw": {
+									"headerFamily": "json",
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/v1/games/join",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"games",
+								"join"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n  \"id\": 51349071,\n  \"nextMove\": \"O\",\n  \"status\": \"Progress\",\n  \"winner\": \"Draw\",\n  \"width\": 31975593,\n  \"height\": 99428979,\n  \"joinKey\": \"6a533751-d7ee-d35d-baf2-6f47da3d2ced\",\n  \"accessKey\": \"urn:uuid:7e79556e-edfa-5131-9607-a4e1ee15edc2\",\n  \"board\": [\n    [\n      \"nulla\",\n      \"occaecat magna sunt enim\"\n    ],\n    [\n      \"ut mollit enim\",\n      \"minim\"\n    ]\n  ],\n  \"moves\": [\n    {\n      \"row\": 78188286,\n      \"column\": 22882588,\n      \"cellValue\": \"O\"\n    },\n    {\n      \"row\": 95887395,\n      \"column\": 84362045,\n      \"cellValue\": \"O\"\n    }\n  ]\n}"
+				},
+				{
+					"name": "Not Found",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Join-Key",
+								"value": "9324b0bd-b718-382a-e541-155b4ab9311b",
+								"description": "(Required) Ключ, используемый для присоедининения к игре"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"playerSymbol\": \"O\"\n}",
+							"options": {
+								"raw": {
+									"headerFamily": "json",
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/v1/games/join",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"games",
+								"join"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n  \"type\": \"dolore sunt nisi cillum\",\n  \"title\": \"anim sint Duis\",\n  \"status\": 30489869,\n  \"detail\": \"amet\",\n  \"instance\": \"in veniam laborum\"\n}"
+				},
+				{
+					"name": "Conflict",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Join-Key",
+								"value": "9324b0bd-b718-382a-e541-155b4ab9311b",
+								"description": "(Required) Ключ, используемый для присоедининения к игре"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"playerSymbol\": \"O\"\n}",
+							"options": {
+								"raw": {
+									"headerFamily": "json",
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/v1/games/join",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"games",
+								"join"
+							]
+						}
+					},
+					"status": "Conflict",
+					"code": 409,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n  \"type\": \"dolore sunt nisi cillum\",\n  \"title\": \"anim sint Duis\",\n  \"status\": 30489869,\n  \"detail\": \"amet\",\n  \"instance\": \"in veniam laborum\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Игрок 1 Сделать ход",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-Access-Key",
+						"value": "9324b0bd-b718-382a-e541-155b4ab9311b",
+						"description": "(Required) Ключ авторизации"
+					},
+					{
+						"key": "Show-Board",
+						"value": "false",
+						"description": "Флаг определяющий, следует ли отображать игровую доску"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"row\": -33705419,\n  \"column\": -9778537\n}",
+					"options": {
+						"raw": {
+							"headerFamily": "json",
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/v1/games/:gameId/move",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"v1",
+						"games",
+						":gameId",
+						"move"
+					],
+					"variable": [
+						{
+							"key": "gameId",
+							"value": "90876744",
+							"description": "(Required) Идентификатор игры"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "OK",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Access-Key",
+								"value": "9324b0bd-b718-382a-e541-155b4ab9311b",
+								"description": "(Required) Ключ авторизации"
+							},
+							{
+								"key": "Show-Board",
+								"value": "false",
+								"description": "Флаг определяющий, следует ли отображать игровую доску"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"row\": -33705419,\n  \"column\": -9778537\n}",
+							"options": {
+								"raw": {
+									"headerFamily": "json",
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/v1/games/:gameId/move",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"games",
+								":gameId",
+								"move"
+							],
+							"variable": [
+								{
+									"key": "gameId"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n  \"id\": 51349071,\n  \"nextMove\": \"O\",\n  \"status\": \"Progress\",\n  \"winner\": \"Draw\",\n  \"width\": 31975593,\n  \"height\": 99428979,\n  \"joinKey\": \"6a533751-d7ee-d35d-baf2-6f47da3d2ced\",\n  \"accessKey\": \"urn:uuid:7e79556e-edfa-5131-9607-a4e1ee15edc2\",\n  \"board\": [\n    [\n      \"nulla\",\n      \"occaecat magna sunt enim\"\n    ],\n    [\n      \"ut mollit enim\",\n      \"minim\"\n    ]\n  ],\n  \"moves\": [\n    {\n      \"row\": 78188286,\n      \"column\": 22882588,\n      \"cellValue\": \"O\"\n    },\n    {\n      \"row\": 95887395,\n      \"column\": 84362045,\n      \"cellValue\": \"O\"\n    }\n  ]\n}"
+				},
+				{
+					"name": "Bad Request",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Access-Key",
+								"value": "9324b0bd-b718-382a-e541-155b4ab9311b",
+								"description": "(Required) Ключ авторизации"
+							},
+							{
+								"key": "Show-Board",
+								"value": "false",
+								"description": "Флаг определяющий, следует ли отображать игровую доску"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"row\": -33705419,\n  \"column\": -9778537\n}",
+							"options": {
+								"raw": {
+									"headerFamily": "json",
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/v1/games/:gameId/move",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"games",
+								":gameId",
+								"move"
+							],
+							"variable": [
+								{
+									"key": "gameId"
+								}
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n  \"type\": \"dolore sunt nisi cillum\",\n  \"title\": \"anim sint Duis\",\n  \"status\": 30489869,\n  \"detail\": \"amet\",\n  \"instance\": \"in veniam laborum\"\n}"
+				},
+				{
+					"name": "Not Found",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Access-Key",
+								"value": "9324b0bd-b718-382a-e541-155b4ab9311b",
+								"description": "(Required) Ключ авторизации"
+							},
+							{
+								"key": "Show-Board",
+								"value": "false",
+								"description": "Флаг определяющий, следует ли отображать игровую доску"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"row\": -33705419,\n  \"column\": -9778537\n}",
+							"options": {
+								"raw": {
+									"headerFamily": "json",
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/v1/games/:gameId/move",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"games",
+								":gameId",
+								"move"
+							],
+							"variable": [
+								{
+									"key": "gameId"
+								}
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n  \"type\": \"dolore sunt nisi cillum\",\n  \"title\": \"anim sint Duis\",\n  \"status\": 30489869,\n  \"detail\": \"amet\",\n  \"instance\": \"in veniam laborum\"\n}"
+				},
+				{
+					"name": "Conflict",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Access-Key",
+								"value": "9324b0bd-b718-382a-e541-155b4ab9311b",
+								"description": "(Required) Ключ авторизации"
+							},
+							{
+								"key": "Show-Board",
+								"value": "false",
+								"description": "Флаг определяющий, следует ли отображать игровую доску"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"row\": -33705419,\n  \"column\": -9778537\n}",
+							"options": {
+								"raw": {
+									"headerFamily": "json",
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/v1/games/:gameId/move",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"games",
+								":gameId",
+								"move"
+							],
+							"variable": [
+								{
+									"key": "gameId"
+								}
+							]
+						}
+					},
+					"status": "Conflict",
+					"code": 409,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n  \"type\": \"dolore sunt nisi cillum\",\n  \"title\": \"anim sint Duis\",\n  \"status\": 30489869,\n  \"detail\": \"amet\",\n  \"instance\": \"in veniam laborum\"\n}"
+				},
+				{
+					"name": "Unprocessable Content",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Access-Key",
+								"value": "9324b0bd-b718-382a-e541-155b4ab9311b",
+								"description": "(Required) Ключ авторизации"
+							},
+							{
+								"key": "Show-Board",
+								"value": "false",
+								"description": "Флаг определяющий, следует ли отображать игровую доску"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"row\": -33705419,\n  \"column\": -9778537\n}",
+							"options": {
+								"raw": {
+									"headerFamily": "json",
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/v1/games/:gameId/move",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"games",
+								":gameId",
+								"move"
+							],
+							"variable": [
+								{
+									"key": "gameId"
+								}
+							]
+						}
+					},
+					"status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+					"code": 422,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n  \"type\": \"dolore sunt nisi cillum\",\n  \"title\": \"anim sint Duis\",\n  \"status\": 30489869,\n  \"detail\": \"amet\",\n  \"instance\": \"in veniam laborum\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Игрок 2 Сделать ход",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-Access-Key",
+						"value": "9324b0bd-b718-382a-e541-155b4ab9311b",
+						"description": "(Required) Ключ авторизации"
+					},
+					{
+						"key": "Show-Board",
+						"value": "false",
+						"description": "Флаг определяющий, следует ли отображать игровую доску"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"row\": -33705419,\n  \"column\": -9778537\n}",
+					"options": {
+						"raw": {
+							"headerFamily": "json",
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/v1/games/:gameId/move",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"v1",
+						"games",
+						":gameId",
+						"move"
+					],
+					"variable": [
+						{
+							"key": "gameId",
+							"value": "90876744",
+							"description": "(Required) Идентификатор игры"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "OK",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Access-Key",
+								"value": "9324b0bd-b718-382a-e541-155b4ab9311b",
+								"description": "(Required) Ключ авторизации"
+							},
+							{
+								"key": "Show-Board",
+								"value": "false",
+								"description": "Флаг определяющий, следует ли отображать игровую доску"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"row\": -33705419,\n  \"column\": -9778537\n}",
+							"options": {
+								"raw": {
+									"headerFamily": "json",
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/v1/games/:gameId/move",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"games",
+								":gameId",
+								"move"
+							],
+							"variable": [
+								{
+									"key": "gameId"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n  \"id\": 51349071,\n  \"nextMove\": \"O\",\n  \"status\": \"Progress\",\n  \"winner\": \"Draw\",\n  \"width\": 31975593,\n  \"height\": 99428979,\n  \"joinKey\": \"6a533751-d7ee-d35d-baf2-6f47da3d2ced\",\n  \"accessKey\": \"urn:uuid:7e79556e-edfa-5131-9607-a4e1ee15edc2\",\n  \"board\": [\n    [\n      \"nulla\",\n      \"occaecat magna sunt enim\"\n    ],\n    [\n      \"ut mollit enim\",\n      \"minim\"\n    ]\n  ],\n  \"moves\": [\n    {\n      \"row\": 78188286,\n      \"column\": 22882588,\n      \"cellValue\": \"O\"\n    },\n    {\n      \"row\": 95887395,\n      \"column\": 84362045,\n      \"cellValue\": \"O\"\n    }\n  ]\n}"
+				},
+				{
+					"name": "Bad Request",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Access-Key",
+								"value": "9324b0bd-b718-382a-e541-155b4ab9311b",
+								"description": "(Required) Ключ авторизации"
+							},
+							{
+								"key": "Show-Board",
+								"value": "false",
+								"description": "Флаг определяющий, следует ли отображать игровую доску"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"row\": -33705419,\n  \"column\": -9778537\n}",
+							"options": {
+								"raw": {
+									"headerFamily": "json",
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/v1/games/:gameId/move",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"games",
+								":gameId",
+								"move"
+							],
+							"variable": [
+								{
+									"key": "gameId"
+								}
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n  \"type\": \"dolore sunt nisi cillum\",\n  \"title\": \"anim sint Duis\",\n  \"status\": 30489869,\n  \"detail\": \"amet\",\n  \"instance\": \"in veniam laborum\"\n}"
+				},
+				{
+					"name": "Not Found",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Access-Key",
+								"value": "9324b0bd-b718-382a-e541-155b4ab9311b",
+								"description": "(Required) Ключ авторизации"
+							},
+							{
+								"key": "Show-Board",
+								"value": "false",
+								"description": "Флаг определяющий, следует ли отображать игровую доску"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"row\": -33705419,\n  \"column\": -9778537\n}",
+							"options": {
+								"raw": {
+									"headerFamily": "json",
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/v1/games/:gameId/move",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"games",
+								":gameId",
+								"move"
+							],
+							"variable": [
+								{
+									"key": "gameId"
+								}
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n  \"type\": \"dolore sunt nisi cillum\",\n  \"title\": \"anim sint Duis\",\n  \"status\": 30489869,\n  \"detail\": \"amet\",\n  \"instance\": \"in veniam laborum\"\n}"
+				},
+				{
+					"name": "Conflict",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Access-Key",
+								"value": "9324b0bd-b718-382a-e541-155b4ab9311b",
+								"description": "(Required) Ключ авторизации"
+							},
+							{
+								"key": "Show-Board",
+								"value": "false",
+								"description": "Флаг определяющий, следует ли отображать игровую доску"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"row\": -33705419,\n  \"column\": -9778537\n}",
+							"options": {
+								"raw": {
+									"headerFamily": "json",
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/v1/games/:gameId/move",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"games",
+								":gameId",
+								"move"
+							],
+							"variable": [
+								{
+									"key": "gameId"
+								}
+							]
+						}
+					},
+					"status": "Conflict",
+					"code": 409,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n  \"type\": \"dolore sunt nisi cillum\",\n  \"title\": \"anim sint Duis\",\n  \"status\": 30489869,\n  \"detail\": \"amet\",\n  \"instance\": \"in veniam laborum\"\n}"
+				},
+				{
+					"name": "Unprocessable Content",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Access-Key",
+								"value": "9324b0bd-b718-382a-e541-155b4ab9311b",
+								"description": "(Required) Ключ авторизации"
+							},
+							{
+								"key": "Show-Board",
+								"value": "false",
+								"description": "Флаг определяющий, следует ли отображать игровую доску"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"row\": -33705419,\n  \"column\": -9778537\n}",
+							"options": {
+								"raw": {
+									"headerFamily": "json",
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/v1/games/:gameId/move",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"games",
+								":gameId",
+								"move"
+							],
+							"variable": [
+								{
+									"key": "gameId"
+								}
+							]
+						}
+					},
+					"status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+					"code": 422,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n  \"type\": \"dolore sunt nisi cillum\",\n  \"title\": \"anim sint Duis\",\n  \"status\": 30489869,\n  \"detail\": \"amet\",\n  \"instance\": \"in veniam laborum\"\n}"
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "/"
+		}
+	]
+}
