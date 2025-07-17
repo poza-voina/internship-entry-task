@@ -1,6 +1,0 @@
-@InternshipEntryTask.Api_HostAddress = http://localhost:5205
-
-GET {{InternshipEntryTask.Api_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###

@@ -10,10 +10,10 @@ using Serilog;
 using System.Reflection;
 using System.Text.Json.Serialization;
 
-/// Есть какие-то опции у IConfiguration) а я все через получение секции делал) переделывать не буду.
+/// Р•СЃС‚СЊ РєР°РєРёРµ-С‚Рѕ РѕРїС†РёРё Сѓ IConfiguration) Р° СЏ РІСЃРµ С‡РµСЂРµР· РїРѕР»СѓС‡РµРЅРёРµ СЃРµРєС†РёРё РґРµР»Р°Р») РїРµСЂРµРґРµР»С‹РІР°С‚СЊ РЅРµ Р±СѓРґСѓ.
 
 /// <summary>
-/// Точка входа в приложение
+/// РўРѕС‡РєР° РІС…РѕРґР° РІ РїСЂРёР»РѕР¶РµРЅРёРµ
 /// </summary>
 public class Program
 {
@@ -37,14 +37,16 @@ public class Program
 
             x.IncludeXmlComments(xmlPath);
             x.IncludeXmlComments(coreXmlPath);
+
+            x.OperationFilter<RemoveTextPlainResponseFilter>();
         });
 
         services.AddApplicationDbContext(configuration);
         services.AddServices();
         services.AddRepositories();
+        services.AddExceptionHandler<ExceptionHandler>();
         services.AddProblems();
         builder.AddSerilog();
-        services.AddExceptionHandler<ExceptionHandler>();
         services.AddMemoryCache();
         services.Configure<ApiBehaviorOptions>(options =>
         {

@@ -63,3 +63,596 @@ WHERE id = @p9;
 2025-07-17 10:00:06.767 +03:00 [INF] Content root path: E:\projects\entry\internship-entry-task\src\InternshipEntryTask.Api
 2025-07-17 10:00:09.864 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5205/swagger/v1/swagger.yaml - null null
 2025-07-17 10:00:10.203 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5205/swagger/v1/swagger.yaml - 200 null text/yaml;charset=utf-8 343.4141ms
+2025-07-17 10:48:51.276 +03:00 [INF] Executed DbCommand (18ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT "MigrationId", "ProductVersion"
+FROM "__EFMigrationsHistory"
+ORDER BY "MigrationId";
+2025-07-17 10:48:51.515 +03:00 [INF] Executed DbCommand (14ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE IF NOT EXISTS "__EFMigrationsHistory" (
+    "MigrationId" character varying(150) NOT NULL,
+    "ProductVersion" character varying(32) NOT NULL,
+    CONSTRAINT "PK___EFMigrationsHistory" PRIMARY KEY ("MigrationId")
+);
+2025-07-17 10:48:51.525 +03:00 [INF] Acquiring an exclusive lock for migration application. See https://aka.ms/efcore-docs-migrations-lock for more information if this takes too long.
+2025-07-17 10:48:51.529 +03:00 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+LOCK TABLE "__EFMigrationsHistory" IN ACCESS EXCLUSIVE MODE
+2025-07-17 10:48:51.532 +03:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT "MigrationId", "ProductVersion"
+FROM "__EFMigrationsHistory"
+ORDER BY "MigrationId";
+2025-07-17 10:48:51.540 +03:00 [INF] Applying migration '20250717074833_LastMigration'.
+2025-07-17 10:48:51.590 +03:00 [INF] Executed DbCommand (45ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+ALTER TABLE games DROP COLUMN "LastMoveHash";
+2025-07-17 10:48:51.596 +03:00 [INF] Executed DbCommand (5ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "__EFMigrationsHistory" ("MigrationId", "ProductVersion")
+VALUES ('20250717074833_LastMigration', '9.0.6');
+2025-07-17 11:02:32.773 +03:00 [INF] Now listening on: https://localhost:7071
+2025-07-17 11:02:32.834 +03:00 [INF] Now listening on: http://localhost:5205
+2025-07-17 11:02:32.895 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7071/swagger/index.html - null null
+2025-07-17 11:02:32.984 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-07-17 11:02:32.997 +03:00 [INF] Hosting environment: Development
+2025-07-17 11:02:32.999 +03:00 [INF] Content root path: E:\projects\entry\internship-entry-task\src\InternshipEntryTask.Api
+2025-07-17 11:02:33.335 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7071/swagger/index.html - 200 null text/html;charset=utf-8 446.0365ms
+2025-07-17 11:02:33.344 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7071/_vs/browserLink - null null
+2025-07-17 11:02:33.346 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7071/_framework/aspnetcore-browser-refresh.js - null null
+2025-07-17 11:02:33.369 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7071/_framework/aspnetcore-browser-refresh.js - 200 16531 application/javascript; charset=utf-8 24.6357ms
+2025-07-17 11:02:33.766 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7071/_vs/browserLink - 200 null text/javascript; charset=UTF-8 421.9979ms
+2025-07-17 11:02:33.800 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7071/swagger/v1/swagger.json - null null
+2025-07-17 11:02:34.072 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7071/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 272.86ms
+2025-07-17 11:02:37.131 +03:00 [INF] Request starting HTTP/2 POST https://localhost:7071/v1/games - null 0
+2025-07-17 11:02:37.159 +03:00 [INF] Executing endpoint 'InternshipEntryTask.Api.Controllers.v1.GameController.CreateGame (InternshipEntryTask.Api)'
+2025-07-17 11:02:37.181 +03:00 [INF] Route matched with {action = "CreateGame", controller = "Game"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Http.IResult] CreateGame() on controller InternshipEntryTask.Api.Controllers.v1.GameController (InternshipEntryTask.Api).
+2025-07-17 11:02:39.504 +03:00 [INF] Executed DbCommand (82ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = Guid), @p2='?' (DbType = Int32), @p3='?' (DbType = Guid), @p4='?' (DbType = Int32), @p5='?' (DbType = Int32), @p6='?' (DbType = Int32), @p7='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO games (anonymous_player_o_id, anonymous_player_x_id, height, join_key, next_move, status, width, "Winner")
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7)
+RETURNING id;
+2025-07-17 11:02:39.572 +03:00 [INF] Setting HTTP status code 200.
+2025-07-17 11:02:39.587 +03:00 [INF] Writing value of type 'GameDto' as Json.
+2025-07-17 11:02:39.600 +03:00 [INF] Executed action InternshipEntryTask.Api.Controllers.v1.GameController.CreateGame (InternshipEntryTask.Api) in 2414.8326ms
+2025-07-17 11:02:39.604 +03:00 [INF] Executed endpoint 'InternshipEntryTask.Api.Controllers.v1.GameController.CreateGame (InternshipEntryTask.Api)'
+2025-07-17 11:02:39.613 +03:00 [INF] Request finished HTTP/2 POST https://localhost:7071/v1/games - 200 null application/json; charset=utf-8 2481.9081ms
+2025-07-17 11:02:54.955 +03:00 [INF] Request starting HTTP/2 POST https://localhost:7071/v1/games/join - application/json 25
+2025-07-17 11:02:54.963 +03:00 [INF] Executing endpoint 'InternshipEntryTask.Api.Controllers.v1.GameController.JoinGame (InternshipEntryTask.Api)'
+2025-07-17 11:02:54.977 +03:00 [INF] Route matched with {action = "JoinGame", controller = "Game"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Http.IResult] JoinGame(InternshipEntryTask.Core.Data.Game.JoinRequest, System.Guid) on controller InternshipEntryTask.Api.Controllers.v1.GameController (InternshipEntryTask.Api).
+2025-07-17 11:02:55.495 +03:00 [INF] Executed DbCommand (3ms) [Parameters=[@__joinKey_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT g.id, g.anonymous_player_o_id, g.anonymous_player_x_id, g.height, g.join_key, g.next_move, g.status, g.width, g."Winner"
+FROM games AS g
+WHERE g.join_key = @__joinKey_0
+LIMIT 1
+2025-07-17 11:02:58.671 +03:00 [INF] Executed action InternshipEntryTask.Api.Controllers.v1.GameController.JoinGame (InternshipEntryTask.Api) in 3690.9628ms
+2025-07-17 11:02:58.675 +03:00 [INF] Executed endpoint 'InternshipEntryTask.Api.Controllers.v1.GameController.JoinGame (InternshipEntryTask.Api)'
+2025-07-17 11:02:58.682 +03:00 [ERR] An unhandled exception has occurred while executing the request.
+InternshipEntryTask.Abstractions.Exceptions.EntityNotFoundException: Игра не найдена для указанного ключа присоединия
+   at InternshipEntryTask.Core.Services.GameService.JoinGameAsync(JoinRequest request, Guid joinKey) in E:\projects\entry\internship-entry-task\src\InternshipEntryTask.Core\Services\GameService.cs:line 67
+   at InternshipEntryTask.Api.Controllers.v1.GameController.JoinGame(JoinRequest request, Guid joinKey) in E:\projects\entry\internship-entry-task\src\InternshipEntryTask.Api\Controllers\v1\GameController.cs:line 64
+   at lambda_method126(Closure, Object)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.AwaitableObjectResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|7_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddlewareImpl.<Invoke>g__Awaited|10_0(ExceptionHandlerMiddlewareImpl middleware, HttpContext context, Task task)
+2025-07-17 11:03:01.116 +03:00 [INF] Request finished HTTP/2 POST https://localhost:7071/v1/games/join - 404 null application/problem+json; charset=utf-8 6160.8348ms
+2025-07-17 11:03:20.883 +03:00 [INF] Request starting HTTP/2 POST https://localhost:7071/v1/games/join - application/json 25
+2025-07-17 11:03:20.888 +03:00 [INF] Executing endpoint 'InternshipEntryTask.Api.Controllers.v1.GameController.JoinGame (InternshipEntryTask.Api)'
+2025-07-17 11:03:20.890 +03:00 [INF] Route matched with {action = "JoinGame", controller = "Game"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Http.IResult] JoinGame(InternshipEntryTask.Core.Data.Game.JoinRequest, System.Guid) on controller InternshipEntryTask.Api.Controllers.v1.GameController (InternshipEntryTask.Api).
+2025-07-17 11:03:20.945 +03:00 [INF] Executed DbCommand (1ms) [Parameters=[@__joinKey_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT g.id, g.anonymous_player_o_id, g.anonymous_player_x_id, g.height, g.join_key, g.next_move, g.status, g.width, g."Winner"
+FROM games AS g
+WHERE g.join_key = @__joinKey_0
+LIMIT 1
+2025-07-17 11:03:25.396 +03:00 [INF] Executed action InternshipEntryTask.Api.Controllers.v1.GameController.JoinGame (InternshipEntryTask.Api) in 4503.7726ms
+2025-07-17 11:03:25.399 +03:00 [INF] Executed endpoint 'InternshipEntryTask.Api.Controllers.v1.GameController.JoinGame (InternshipEntryTask.Api)'
+2025-07-17 11:03:25.402 +03:00 [ERR] An unhandled exception has occurred while executing the request.
+InternshipEntryTask.Abstractions.Exceptions.EntityNotFoundException: Игра не найдена для указанного ключа присоединия
+   at InternshipEntryTask.Core.Services.GameService.JoinGameAsync(JoinRequest request, Guid joinKey) in E:\projects\entry\internship-entry-task\src\InternshipEntryTask.Core\Services\GameService.cs:line 67
+   at InternshipEntryTask.Api.Controllers.v1.GameController.JoinGame(JoinRequest request, Guid joinKey) in E:\projects\entry\internship-entry-task\src\InternshipEntryTask.Api\Controllers\v1\GameController.cs:line 64
+   at lambda_method126(Closure, Object)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.AwaitableObjectResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|7_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddlewareImpl.<Invoke>g__Awaited|10_0(ExceptionHandlerMiddlewareImpl middleware, HttpContext context, Task task)
+2025-07-17 11:07:44.886 +03:00 [INF] Now listening on: https://localhost:7071
+2025-07-17 11:07:44.905 +03:00 [INF] Now listening on: http://localhost:5205
+2025-07-17 11:07:44.982 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-07-17 11:07:44.982 +03:00 [INF] Hosting environment: Development
+2025-07-17 11:07:44.983 +03:00 [INF] Content root path: E:\projects\entry\internship-entry-task\src\InternshipEntryTask.Api
+2025-07-17 11:07:49.712 +03:00 [INF] Request starting HTTP/2 POST https://localhost:7071/v1/games/join - application/json 25
+2025-07-17 11:07:49.921 +03:00 [INF] Executing endpoint 'InternshipEntryTask.Api.Controllers.v1.GameController.JoinGame (InternshipEntryTask.Api)'
+2025-07-17 11:07:49.954 +03:00 [INF] Route matched with {action = "JoinGame", controller = "Game"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Http.IResult] JoinGame(InternshipEntryTask.Core.Data.Game.JoinRequest, System.Guid) on controller InternshipEntryTask.Api.Controllers.v1.GameController (InternshipEntryTask.Api).
+2025-07-17 11:07:51.677 +03:00 [INF] Executed DbCommand (92ms) [Parameters=[@__joinKey_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT g.id, g.anonymous_player_o_id, g.anonymous_player_x_id, g.height, g.join_key, g.next_move, g.status, g.width, g."Winner"
+FROM games AS g
+WHERE g.join_key = @__joinKey_0
+LIMIT 1
+2025-07-17 11:07:53.437 +03:00 [INF] Executed action InternshipEntryTask.Api.Controllers.v1.GameController.JoinGame (InternshipEntryTask.Api) in 3479.0225ms
+2025-07-17 11:07:53.441 +03:00 [INF] Executed endpoint 'InternshipEntryTask.Api.Controllers.v1.GameController.JoinGame (InternshipEntryTask.Api)'
+2025-07-17 11:07:53.446 +03:00 [ERR] An unhandled exception has occurred while executing the request.
+InternshipEntryTask.Abstractions.Exceptions.EntityNotFoundException: Игра не найдена для указанного ключа присоединия
+   at InternshipEntryTask.Core.Services.GameService.JoinGameAsync(JoinRequest request, Guid joinKey) in E:\projects\entry\internship-entry-task\src\InternshipEntryTask.Core\Services\GameService.cs:line 67
+   at InternshipEntryTask.Api.Controllers.v1.GameController.JoinGame(JoinRequest request, Guid joinKey) in E:\projects\entry\internship-entry-task\src\InternshipEntryTask.Api\Controllers\v1\GameController.cs:line 64
+   at lambda_method5(Closure, Object)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.AwaitableObjectResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|7_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddlewareImpl.<Invoke>g__Awaited|10_0(ExceptionHandlerMiddlewareImpl middleware, HttpContext context, Task task)
+2025-07-17 11:07:56.251 +03:00 [INF] Request finished HTTP/2 POST https://localhost:7071/v1/games/join - 404 null application/problem+json; charset=utf-8 6545.3891ms
+2025-07-17 11:08:29.219 +03:00 [INF] Request starting HTTP/2 POST https://localhost:7071/v1/games/join - application/json 25
+2025-07-17 11:08:29.223 +03:00 [INF] Executing endpoint 'InternshipEntryTask.Api.Controllers.v1.GameController.JoinGame (InternshipEntryTask.Api)'
+2025-07-17 11:08:29.268 +03:00 [INF] Route matched with {action = "JoinGame", controller = "Game"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Http.IResult] JoinGame(InternshipEntryTask.Core.Data.Game.JoinRequest, System.Guid) on controller InternshipEntryTask.Api.Controllers.v1.GameController (InternshipEntryTask.Api).
+2025-07-17 11:08:29.324 +03:00 [INF] Executed DbCommand (4ms) [Parameters=[@__joinKey_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT g.id, g.anonymous_player_o_id, g.anonymous_player_x_id, g.height, g.join_key, g.next_move, g.status, g.width, g."Winner"
+FROM games AS g
+WHERE g.join_key = @__joinKey_0
+LIMIT 1
+2025-07-17 11:08:32.259 +03:00 [INF] Executed action InternshipEntryTask.Api.Controllers.v1.GameController.JoinGame (InternshipEntryTask.Api) in 2989.5203ms
+2025-07-17 11:08:32.262 +03:00 [INF] Executed endpoint 'InternshipEntryTask.Api.Controllers.v1.GameController.JoinGame (InternshipEntryTask.Api)'
+2025-07-17 11:08:32.263 +03:00 [ERR] An unhandled exception has occurred while executing the request.
+InternshipEntryTask.Abstractions.Exceptions.EntityNotFoundException: Игра не найдена для указанного ключа присоединия
+   at InternshipEntryTask.Core.Services.GameService.JoinGameAsync(JoinRequest request, Guid joinKey) in E:\projects\entry\internship-entry-task\src\InternshipEntryTask.Core\Services\GameService.cs:line 67
+   at InternshipEntryTask.Api.Controllers.v1.GameController.JoinGame(JoinRequest request, Guid joinKey) in E:\projects\entry\internship-entry-task\src\InternshipEntryTask.Api\Controllers\v1\GameController.cs:line 64
+   at lambda_method5(Closure, Object)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.AwaitableObjectResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|7_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddlewareImpl.<Invoke>g__Awaited|10_0(ExceptionHandlerMiddlewareImpl middleware, HttpContext context, Task task)
+2025-07-17 11:10:28.369 +03:00 [INF] Now listening on: https://localhost:7071
+2025-07-17 11:10:28.420 +03:00 [INF] Now listening on: http://localhost:5205
+2025-07-17 11:10:28.543 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-07-17 11:10:28.545 +03:00 [INF] Hosting environment: Development
+2025-07-17 11:10:28.545 +03:00 [INF] Content root path: E:\projects\entry\internship-entry-task\src\InternshipEntryTask.Api
+2025-07-17 11:10:32.572 +03:00 [INF] Request starting HTTP/2 POST https://localhost:7071/v1/games/join - application/json 25
+2025-07-17 11:10:32.648 +03:00 [INF] Executing endpoint 'InternshipEntryTask.Api.Controllers.v1.GameController.JoinGame (InternshipEntryTask.Api)'
+2025-07-17 11:10:32.668 +03:00 [INF] Route matched with {action = "JoinGame", controller = "Game"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Http.IResult] JoinGame(InternshipEntryTask.Core.Data.Game.JoinRequest, System.Guid) on controller InternshipEntryTask.Api.Controllers.v1.GameController (InternshipEntryTask.Api).
+2025-07-17 11:10:34.270 +03:00 [INF] Executed DbCommand (63ms) [Parameters=[@__joinKey_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT g.id, g.anonymous_player_o_id, g.anonymous_player_x_id, g.height, g.join_key, g.next_move, g.status, g.width, g."Winner"
+FROM games AS g
+WHERE g.join_key = @__joinKey_0
+LIMIT 1
+2025-07-17 11:10:36.053 +03:00 [INF] Executed action InternshipEntryTask.Api.Controllers.v1.GameController.JoinGame (InternshipEntryTask.Api) in 3379.0112ms
+2025-07-17 11:10:36.096 +03:00 [INF] Executed endpoint 'InternshipEntryTask.Api.Controllers.v1.GameController.JoinGame (InternshipEntryTask.Api)'
+2025-07-17 11:10:36.110 +03:00 [ERR] An unhandled exception has occurred while executing the request.
+InternshipEntryTask.Abstractions.Exceptions.EntityNotFoundException: Игра не найдена для указанного ключа присоединия
+   at InternshipEntryTask.Core.Services.GameService.JoinGameAsync(JoinRequest request, Guid joinKey) in E:\projects\entry\internship-entry-task\src\InternshipEntryTask.Core\Services\GameService.cs:line 67
+   at InternshipEntryTask.Api.Controllers.v1.GameController.JoinGame(JoinRequest request, Guid joinKey) in E:\projects\entry\internship-entry-task\src\InternshipEntryTask.Api\Controllers\v1\GameController.cs:line 64
+   at lambda_method5(Closure, Object)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.AwaitableObjectResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|7_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddlewareImpl.<Invoke>g__Awaited|10_0(ExceptionHandlerMiddlewareImpl middleware, HttpContext context, Task task)
+2025-07-17 11:13:57.414 +03:00 [INF] Now listening on: https://localhost:7071
+2025-07-17 11:13:57.445 +03:00 [INF] Now listening on: http://localhost:5205
+2025-07-17 11:13:57.526 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-07-17 11:13:57.527 +03:00 [INF] Hosting environment: Development
+2025-07-17 11:13:57.528 +03:00 [INF] Content root path: E:\projects\entry\internship-entry-task\src\InternshipEntryTask.Api
+2025-07-17 11:14:27.026 +03:00 [INF] Request starting HTTP/2 POST https://localhost:7071/v1/games/join - application/json 25
+2025-07-17 11:14:27.150 +03:00 [INF] Executing endpoint 'InternshipEntryTask.Api.Controllers.v1.GameController.JoinGame (InternshipEntryTask.Api)'
+2025-07-17 11:14:27.177 +03:00 [INF] Route matched with {action = "JoinGame", controller = "Game"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Http.IResult] JoinGame(InternshipEntryTask.Core.Data.Game.JoinRequest, System.Guid) on controller InternshipEntryTask.Api.Controllers.v1.GameController (InternshipEntryTask.Api).
+2025-07-17 11:14:28.721 +03:00 [INF] Executed DbCommand (64ms) [Parameters=[@__joinKey_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT g.id, g.anonymous_player_o_id, g.anonymous_player_x_id, g.height, g.join_key, g.next_move, g.status, g.width, g."Winner"
+FROM games AS g
+WHERE g.join_key = @__joinKey_0
+LIMIT 1
+2025-07-17 11:14:33.139 +03:00 [INF] Executed action InternshipEntryTask.Api.Controllers.v1.GameController.JoinGame (InternshipEntryTask.Api) in 5955.7132ms
+2025-07-17 11:14:33.143 +03:00 [INF] Executed endpoint 'InternshipEntryTask.Api.Controllers.v1.GameController.JoinGame (InternshipEntryTask.Api)'
+2025-07-17 11:14:33.148 +03:00 [ERR] An unhandled exception has occurred while executing the request.
+InternshipEntryTask.Abstractions.Exceptions.EntityNotFoundException: Игра не найдена для указанного ключа присоединия
+   at InternshipEntryTask.Core.Services.GameService.JoinGameAsync(JoinRequest request, Guid joinKey) in E:\projects\entry\internship-entry-task\src\InternshipEntryTask.Core\Services\GameService.cs:line 67
+   at InternshipEntryTask.Api.Controllers.v1.GameController.JoinGame(JoinRequest request, Guid joinKey) in E:\projects\entry\internship-entry-task\src\InternshipEntryTask.Api\Controllers\v1\GameController.cs:line 64
+   at lambda_method5(Closure, Object)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.AwaitableObjectResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|7_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddlewareImpl.<Invoke>g__Awaited|10_0(ExceptionHandlerMiddlewareImpl middleware, HttpContext context, Task task)
+2025-07-17 11:14:39.468 +03:00 [INF] Request finished HTTP/2 POST https://localhost:7071/v1/games/join - 404 null application/problem+json; charset=utf-8 12447.8948ms
+2025-07-17 11:16:28.494 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5205/swagger/index.html - null null
+2025-07-17 11:16:28.731 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5205/swagger/index.html - 200 null text/html;charset=utf-8 236.9412ms
+2025-07-17 11:16:28.745 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5205/swagger/swagger-ui.css - null null
+2025-07-17 11:16:28.745 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5205/swagger/index.css - null null
+2025-07-17 11:16:28.746 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5205/swagger/swagger-ui-bundle.js - null null
+2025-07-17 11:16:28.747 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5205/swagger/swagger-ui-standalone-preset.js - null null
+2025-07-17 11:16:28.784 +03:00 [INF] Sending file. Request path: '/index.css'. Physical path: 'N/A'
+2025-07-17 11:16:28.794 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5205/swagger/index.css - 200 202 text/css 48.9407ms
+2025-07-17 11:16:28.789 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5205/_framework/aspnetcore-browser-refresh.js - null null
+2025-07-17 11:16:28.789 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5205/swagger/index.js - null null
+2025-07-17 11:16:28.807 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5205/_framework/aspnetcore-browser-refresh.js - 200 16531 application/javascript; charset=utf-8 18.4707ms
+2025-07-17 11:16:28.803 +03:00 [INF] Sending file. Request path: '/swagger-ui.css'. Physical path: 'N/A'
+2025-07-17 11:16:28.809 +03:00 [INF] Sending file. Request path: '/swagger-ui-standalone-preset.js'. Physical path: 'N/A'
+2025-07-17 11:16:28.809 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5205/swagger/index.js - 200 null application/javascript;charset=utf-8 19.7839ms
+2025-07-17 11:16:28.815 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5205/swagger/swagger-ui.css - 200 154949 text/css 69.6725ms
+2025-07-17 11:16:28.816 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5205/swagger/swagger-ui-standalone-preset.js - 200 229223 text/javascript 69.2871ms
+2025-07-17 11:16:28.832 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5205/_vs/browserLink - null null
+2025-07-17 11:16:28.868 +03:00 [INF] Sending file. Request path: '/swagger-ui-bundle.js'. Physical path: 'N/A'
+2025-07-17 11:16:28.870 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5205/swagger/swagger-ui-bundle.js - 200 1485241 text/javascript 124.3054ms
+2025-07-17 11:16:28.881 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5205/_vs/browserLink - 200 null text/javascript; charset=UTF-8 48.9318ms
+2025-07-17 11:16:29.148 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5205/swagger/v1/swagger.json - null null
+2025-07-17 11:16:29.175 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5205/swagger/favicon-32x32.png - null null
+2025-07-17 11:16:29.178 +03:00 [INF] Sending file. Request path: '/favicon-32x32.png'. Physical path: 'N/A'
+2025-07-17 11:16:29.188 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5205/swagger/favicon-32x32.png - 200 628 image/png 13.1251ms
+2025-07-17 11:16:29.384 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5205/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 235.4255ms
+2025-07-17 11:16:41.570 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5205/v1/games/join - application/json 25
+2025-07-17 11:16:41.579 +03:00 [INF] Executing endpoint 'InternshipEntryTask.Api.Controllers.v1.GameController.JoinGame (InternshipEntryTask.Api)'
+2025-07-17 11:16:41.582 +03:00 [INF] Route matched with {action = "JoinGame", controller = "Game"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Http.IResult] JoinGame(InternshipEntryTask.Core.Data.Game.JoinRequest, System.Guid) on controller InternshipEntryTask.Api.Controllers.v1.GameController (InternshipEntryTask.Api).
+2025-07-17 11:16:41.648 +03:00 [INF] Executed DbCommand (5ms) [Parameters=[@__joinKey_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT g.id, g.anonymous_player_o_id, g.anonymous_player_x_id, g.height, g.join_key, g.next_move, g.status, g.width, g."Winner"
+FROM games AS g
+WHERE g.join_key = @__joinKey_0
+LIMIT 1
+2025-07-17 11:16:43.318 +03:00 [INF] Executed action InternshipEntryTask.Api.Controllers.v1.GameController.JoinGame (InternshipEntryTask.Api) in 1729.8464ms
+2025-07-17 11:16:43.323 +03:00 [INF] Executed endpoint 'InternshipEntryTask.Api.Controllers.v1.GameController.JoinGame (InternshipEntryTask.Api)'
+2025-07-17 11:16:43.325 +03:00 [ERR] An unhandled exception has occurred while executing the request.
+InternshipEntryTask.Abstractions.Exceptions.EntityNotFoundException: Игра не найдена для указанного ключа присоединия
+   at InternshipEntryTask.Core.Services.GameService.JoinGameAsync(JoinRequest request, Guid joinKey) in E:\projects\entry\internship-entry-task\src\InternshipEntryTask.Core\Services\GameService.cs:line 67
+   at InternshipEntryTask.Api.Controllers.v1.GameController.JoinGame(JoinRequest request, Guid joinKey) in E:\projects\entry\internship-entry-task\src\InternshipEntryTask.Api\Controllers\v1\GameController.cs:line 64
+   at lambda_method5(Closure, Object)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.AwaitableObjectResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|7_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddlewareImpl.<Invoke>g__Awaited|10_0(ExceptionHandlerMiddlewareImpl middleware, HttpContext context, Task task)
+2025-07-17 11:16:51.118 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5205/v1/games/join - 404 null application/problem+json; charset=utf-8 9547.5743ms
+2025-07-17 11:17:03.916 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5205/v1/games - null 0
+2025-07-17 11:17:03.929 +03:00 [INF] Executing endpoint 'InternshipEntryTask.Api.Controllers.v1.GameController.CreateGame (InternshipEntryTask.Api)'
+2025-07-17 11:17:03.938 +03:00 [INF] Route matched with {action = "CreateGame", controller = "Game"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Http.IResult] CreateGame() on controller InternshipEntryTask.Api.Controllers.v1.GameController (InternshipEntryTask.Api).
+2025-07-17 11:17:04.353 +03:00 [INF] Executed DbCommand (8ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = Guid), @p2='?' (DbType = Int32), @p3='?' (DbType = Guid), @p4='?' (DbType = Int32), @p5='?' (DbType = Int32), @p6='?' (DbType = Int32), @p7='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO games (anonymous_player_o_id, anonymous_player_x_id, height, join_key, next_move, status, width, "Winner")
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7)
+RETURNING id;
+2025-07-17 11:17:04.425 +03:00 [INF] Setting HTTP status code 200.
+2025-07-17 11:17:04.443 +03:00 [INF] Writing value of type 'GameDto' as Json.
+2025-07-17 11:17:04.450 +03:00 [INF] Executed action InternshipEntryTask.Api.Controllers.v1.GameController.CreateGame (InternshipEntryTask.Api) in 477.1339ms
+2025-07-17 11:17:04.451 +03:00 [INF] Executed endpoint 'InternshipEntryTask.Api.Controllers.v1.GameController.CreateGame (InternshipEntryTask.Api)'
+2025-07-17 11:17:04.452 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5205/v1/games - 200 null application/json; charset=utf-8 536.7217ms
+2025-07-17 11:17:09.365 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5205/v1/games/join - application/json 25
+2025-07-17 11:17:09.367 +03:00 [INF] Executing endpoint 'InternshipEntryTask.Api.Controllers.v1.GameController.JoinGame (InternshipEntryTask.Api)'
+2025-07-17 11:17:09.369 +03:00 [INF] Route matched with {action = "JoinGame", controller = "Game"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Http.IResult] JoinGame(InternshipEntryTask.Core.Data.Game.JoinRequest, System.Guid) on controller InternshipEntryTask.Api.Controllers.v1.GameController (InternshipEntryTask.Api).
+2025-07-17 11:17:09.374 +03:00 [INF] Executed DbCommand (1ms) [Parameters=[@__joinKey_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT g.id, g.anonymous_player_o_id, g.anonymous_player_x_id, g.height, g.join_key, g.next_move, g.status, g.width, g."Winner"
+FROM games AS g
+WHERE g.join_key = @__joinKey_0
+LIMIT 1
+2025-07-17 11:17:10.985 +03:00 [INF] Executed action InternshipEntryTask.Api.Controllers.v1.GameController.JoinGame (InternshipEntryTask.Api) in 1614.4844ms
+2025-07-17 11:17:10.986 +03:00 [INF] Executed endpoint 'InternshipEntryTask.Api.Controllers.v1.GameController.JoinGame (InternshipEntryTask.Api)'
+2025-07-17 11:17:10.988 +03:00 [ERR] An unhandled exception has occurred while executing the request.
+InternshipEntryTask.Abstractions.Exceptions.EntityNotFoundException: Игра не найдена для указанного ключа присоединия
+   at InternshipEntryTask.Core.Services.GameService.JoinGameAsync(JoinRequest request, Guid joinKey) in E:\projects\entry\internship-entry-task\src\InternshipEntryTask.Core\Services\GameService.cs:line 67
+   at InternshipEntryTask.Api.Controllers.v1.GameController.JoinGame(JoinRequest request, Guid joinKey) in E:\projects\entry\internship-entry-task\src\InternshipEntryTask.Api\Controllers\v1\GameController.cs:line 64
+   at lambda_method5(Closure, Object)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.AwaitableObjectResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|7_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddlewareImpl.<Invoke>g__Awaited|10_0(ExceptionHandlerMiddlewareImpl middleware, HttpContext context, Task task)
+2025-07-17 11:17:12.640 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5205/v1/games/join - 404 null application/problem+json; charset=utf-8 3274.4821ms
+2025-07-17 11:18:04.771 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5205/v1/games/join - application/problem+json 25
+2025-07-17 11:18:04.777 +03:00 [INF] Executing endpoint 'InternshipEntryTask.Api.Controllers.v1.GameController.JoinGame (InternshipEntryTask.Api)'
+2025-07-17 11:18:04.779 +03:00 [INF] Route matched with {action = "JoinGame", controller = "Game"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Http.IResult] JoinGame(InternshipEntryTask.Core.Data.Game.JoinRequest, System.Guid) on controller InternshipEntryTask.Api.Controllers.v1.GameController (InternshipEntryTask.Api).
+2025-07-17 11:18:04.784 +03:00 [INF] Executed DbCommand (1ms) [Parameters=[@__joinKey_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT g.id, g.anonymous_player_o_id, g.anonymous_player_x_id, g.height, g.join_key, g.next_move, g.status, g.width, g."Winner"
+FROM games AS g
+WHERE g.join_key = @__joinKey_0
+LIMIT 1
+2025-07-17 11:18:06.231 +03:00 [INF] Executed action InternshipEntryTask.Api.Controllers.v1.GameController.JoinGame (InternshipEntryTask.Api) in 1450.3086ms
+2025-07-17 11:18:06.242 +03:00 [INF] Executed endpoint 'InternshipEntryTask.Api.Controllers.v1.GameController.JoinGame (InternshipEntryTask.Api)'
+2025-07-17 11:18:06.243 +03:00 [ERR] An unhandled exception has occurred while executing the request.
+InternshipEntryTask.Abstractions.Exceptions.EntityNotFoundException: Игра не найдена для указанного ключа присоединия
+   at InternshipEntryTask.Core.Services.GameService.JoinGameAsync(JoinRequest request, Guid joinKey) in E:\projects\entry\internship-entry-task\src\InternshipEntryTask.Core\Services\GameService.cs:line 67
+   at InternshipEntryTask.Api.Controllers.v1.GameController.JoinGame(JoinRequest request, Guid joinKey) in E:\projects\entry\internship-entry-task\src\InternshipEntryTask.Api\Controllers\v1\GameController.cs:line 64
+   at lambda_method5(Closure, Object)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.AwaitableObjectResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|7_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddlewareImpl.<Invoke>g__Awaited|10_0(ExceptionHandlerMiddlewareImpl middleware, HttpContext context, Task task)
+2025-07-17 11:18:07.945 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5205/v1/games/join - 404 null application/problem+json; charset=utf-8 3173.8748ms
+2025-07-17 11:26:22.463 +03:00 [INF] Now listening on: https://localhost:7071
+2025-07-17 11:26:22.492 +03:00 [INF] Now listening on: http://localhost:5205
+2025-07-17 11:26:22.568 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-07-17 11:26:22.569 +03:00 [INF] Hosting environment: Development
+2025-07-17 11:26:22.570 +03:00 [INF] Content root path: E:\projects\entry\internship-entry-task\src\InternshipEntryTask.Api
+2025-07-17 11:26:23.263 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5205/v1/games/join - application/problem+json 25
+2025-07-17 11:26:23.406 +03:00 [INF] Executing endpoint 'InternshipEntryTask.Api.Controllers.v1.GameController.JoinGame (InternshipEntryTask.Api)'
+2025-07-17 11:26:23.430 +03:00 [INF] Route matched with {action = "JoinGame", controller = "Game"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Http.IResult] JoinGame(InternshipEntryTask.Core.Data.Game.JoinRequest, System.Guid) on controller InternshipEntryTask.Api.Controllers.v1.GameController (InternshipEntryTask.Api).
+2025-07-17 11:26:25.444 +03:00 [INF] Executed DbCommand (70ms) [Parameters=[@__joinKey_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT g.id, g.anonymous_player_o_id, g.anonymous_player_x_id, g.height, g.join_key, g.next_move, g.status, g.width, g."Winner"
+FROM games AS g
+WHERE g.join_key = @__joinKey_0
+LIMIT 1
+2025-07-17 11:26:28.147 +03:00 [INF] Executed action InternshipEntryTask.Api.Controllers.v1.GameController.JoinGame (InternshipEntryTask.Api) in 4709.9749ms
+2025-07-17 11:26:28.153 +03:00 [INF] Executed endpoint 'InternshipEntryTask.Api.Controllers.v1.GameController.JoinGame (InternshipEntryTask.Api)'
+2025-07-17 11:26:28.159 +03:00 [ERR] An unhandled exception has occurred while executing the request.
+InternshipEntryTask.Abstractions.Exceptions.EntityNotFoundException: Игра не найдена для указанного ключа присоединия
+   at InternshipEntryTask.Core.Services.GameService.JoinGameAsync(JoinRequest request, Guid joinKey) in E:\projects\entry\internship-entry-task\src\InternshipEntryTask.Core\Services\GameService.cs:line 67
+   at InternshipEntryTask.Api.Controllers.v1.GameController.JoinGame(JoinRequest request, Guid joinKey) in E:\projects\entry\internship-entry-task\src\InternshipEntryTask.Api\Controllers\v1\GameController.cs:line 64
+   at lambda_method5(Closure, Object)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.AwaitableObjectResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|7_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddlewareImpl.<Invoke>g__Awaited|10_0(ExceptionHandlerMiddlewareImpl middleware, HttpContext context, Task task)
+2025-07-17 11:26:56.414 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5205/v1/games/join - 404 null application/problem+json; charset=utf-8 33164.0181ms
+2025-07-17 11:34:32.197 +03:00 [INF] Now listening on: https://localhost:7071
+2025-07-17 11:34:32.223 +03:00 [INF] Now listening on: http://localhost:5205
+2025-07-17 11:34:32.305 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-07-17 11:34:32.306 +03:00 [INF] Hosting environment: Development
+2025-07-17 11:34:32.306 +03:00 [INF] Content root path: E:\projects\entry\internship-entry-task\src\InternshipEntryTask.Api
+2025-07-17 11:34:33.145 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5205/v1/games/join - application/problem+json 25
+2025-07-17 11:34:33.279 +03:00 [INF] Executing endpoint 'InternshipEntryTask.Api.Controllers.v1.GameController.JoinGame (InternshipEntryTask.Api)'
+2025-07-17 11:34:33.305 +03:00 [INF] Route matched with {action = "JoinGame", controller = "Game"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Http.IResult] JoinGame(InternshipEntryTask.Core.Data.Game.JoinRequest, System.Guid) on controller InternshipEntryTask.Api.Controllers.v1.GameController (InternshipEntryTask.Api).
+2025-07-17 11:34:35.075 +03:00 [INF] Executed DbCommand (65ms) [Parameters=[@__joinKey_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT g.id, g.anonymous_player_o_id, g.anonymous_player_x_id, g.height, g.join_key, g.next_move, g.status, g.width, g."Winner"
+FROM games AS g
+WHERE g.join_key = @__joinKey_0
+LIMIT 1
+2025-07-17 11:34:38.946 +03:00 [INF] Executed action InternshipEntryTask.Api.Controllers.v1.GameController.JoinGame (InternshipEntryTask.Api) in 5635.0095ms
+2025-07-17 11:34:38.952 +03:00 [INF] Executed endpoint 'InternshipEntryTask.Api.Controllers.v1.GameController.JoinGame (InternshipEntryTask.Api)'
+2025-07-17 11:34:38.958 +03:00 [ERR] An unhandled exception has occurred while executing the request.
+InternshipEntryTask.Abstractions.Exceptions.EntityNotFoundException: Игра не найдена для указанного ключа присоединия
+   at InternshipEntryTask.Core.Services.GameService.JoinGameAsync(JoinRequest request, Guid joinKey) in E:\projects\entry\internship-entry-task\src\InternshipEntryTask.Core\Services\GameService.cs:line 67
+   at InternshipEntryTask.Api.Controllers.v1.GameController.JoinGame(JoinRequest request, Guid joinKey) in E:\projects\entry\internship-entry-task\src\InternshipEntryTask.Api\Controllers\v1\GameController.cs:line 64
+   at lambda_method5(Closure, Object)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.AwaitableObjectResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|7_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddlewareImpl.<Invoke>g__Awaited|10_0(ExceptionHandlerMiddlewareImpl middleware, HttpContext context, Task task)
+2025-07-17 11:34:43.894 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5205/v1/games/join - 404 null application/problem+json; charset=utf-8 10755.1214ms
+2025-07-17 11:35:02.913 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5205/v1/games/join - application/problem+json 25
+2025-07-17 11:35:02.917 +03:00 [INF] Executing endpoint 'InternshipEntryTask.Api.Controllers.v1.GameController.JoinGame (InternshipEntryTask.Api)'
+2025-07-17 11:35:02.924 +03:00 [INF] Route matched with {action = "JoinGame", controller = "Game"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Http.IResult] JoinGame(InternshipEntryTask.Core.Data.Game.JoinRequest, System.Guid) on controller InternshipEntryTask.Api.Controllers.v1.GameController (InternshipEntryTask.Api).
+2025-07-17 11:35:03.004 +03:00 [INF] Executed DbCommand (10ms) [Parameters=[@__joinKey_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT g.id, g.anonymous_player_o_id, g.anonymous_player_x_id, g.height, g.join_key, g.next_move, g.status, g.width, g."Winner"
+FROM games AS g
+WHERE g.join_key = @__joinKey_0
+LIMIT 1
+2025-07-17 11:35:04.351 +03:00 [INF] Executed action InternshipEntryTask.Api.Controllers.v1.GameController.JoinGame (InternshipEntryTask.Api) in 1421.2974ms
+2025-07-17 11:35:04.353 +03:00 [INF] Executed endpoint 'InternshipEntryTask.Api.Controllers.v1.GameController.JoinGame (InternshipEntryTask.Api)'
+2025-07-17 11:35:04.354 +03:00 [ERR] An unhandled exception has occurred while executing the request.
+InternshipEntryTask.Abstractions.Exceptions.EntityNotFoundException: Игра не найдена для указанного ключа присоединия
+   at InternshipEntryTask.Core.Services.GameService.JoinGameAsync(JoinRequest request, Guid joinKey) in E:\projects\entry\internship-entry-task\src\InternshipEntryTask.Core\Services\GameService.cs:line 67
+   at InternshipEntryTask.Api.Controllers.v1.GameController.JoinGame(JoinRequest request, Guid joinKey) in E:\projects\entry\internship-entry-task\src\InternshipEntryTask.Api\Controllers\v1\GameController.cs:line 64
+   at lambda_method5(Closure, Object)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.AwaitableObjectResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|7_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddlewareImpl.<Invoke>g__Awaited|10_0(ExceptionHandlerMiddlewareImpl middleware, HttpContext context, Task task)
+2025-07-17 11:35:06.486 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5205/v1/games/join - 404 null application/problem+json 3572.9754ms
+2025-07-17 11:41:02.304 +03:00 [INF] Now listening on: https://localhost:7071
+2025-07-17 11:41:02.320 +03:00 [INF] Now listening on: http://localhost:5205
+2025-07-17 11:41:02.388 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-07-17 11:41:02.389 +03:00 [INF] Hosting environment: Development
+2025-07-17 11:41:02.390 +03:00 [INF] Content root path: E:\projects\entry\internship-entry-task\src\InternshipEntryTask.Api
+2025-07-17 11:41:02.438 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5205/swagger/index.html - null null
+2025-07-17 11:41:02.714 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5205/swagger/index.html - null null
+2025-07-17 11:41:02.724 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5205/swagger/index.html - 200 null text/html;charset=utf-8 289.1567ms
+2025-07-17 11:41:02.724 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5205/swagger/index.html - 200 null text/html;charset=utf-8 9.045ms
+2025-07-17 11:41:02.865 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5205/_vs/browserLink - null null
+2025-07-17 11:41:02.872 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5205/_framework/aspnetcore-browser-refresh.js - null null
+2025-07-17 11:41:02.877 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5205/_framework/aspnetcore-browser-refresh.js - 200 16531 application/javascript; charset=utf-8 5.0104ms
+2025-07-17 11:41:02.902 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5205/_vs/browserLink - 200 null text/javascript; charset=UTF-8 37.5145ms
+2025-07-17 11:41:03.156 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5205/swagger/v1/swagger.json - null null
+2025-07-17 11:41:03.410 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5205/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 254.3661ms
+2025-07-17 11:41:18.088 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5205/v1/games/join - application/json 25
+2025-07-17 11:41:18.103 +03:00 [INF] Executing endpoint 'InternshipEntryTask.Api.Controllers.v1.GameController.JoinGame (InternshipEntryTask.Api)'
+2025-07-17 11:41:18.130 +03:00 [INF] Route matched with {action = "JoinGame", controller = "Game"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Http.IResult] JoinGame(InternshipEntryTask.Core.Data.Game.JoinRequest, System.Guid) on controller InternshipEntryTask.Api.Controllers.v1.GameController (InternshipEntryTask.Api).
+2025-07-17 11:41:19.529 +03:00 [INF] Executed DbCommand (54ms) [Parameters=[@__joinKey_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT g.id, g.anonymous_player_o_id, g.anonymous_player_x_id, g.height, g.join_key, g.next_move, g.status, g.width, g."Winner"
+FROM games AS g
+WHERE g.join_key = @__joinKey_0
+LIMIT 1
+2025-07-17 11:41:22.667 +03:00 [INF] Executed action InternshipEntryTask.Api.Controllers.v1.GameController.JoinGame (InternshipEntryTask.Api) in 4530.6173ms
+2025-07-17 11:41:22.669 +03:00 [INF] Executed endpoint 'InternshipEntryTask.Api.Controllers.v1.GameController.JoinGame (InternshipEntryTask.Api)'
+2025-07-17 11:41:22.675 +03:00 [ERR] An unhandled exception has occurred while executing the request.
+InternshipEntryTask.Abstractions.Exceptions.EntityNotFoundException: Игра не найдена для указанного ключа присоединия
+   at InternshipEntryTask.Core.Services.GameService.JoinGameAsync(JoinRequest request, Guid joinKey) in E:\projects\entry\internship-entry-task\src\InternshipEntryTask.Core\Services\GameService.cs:line 67
+   at InternshipEntryTask.Api.Controllers.v1.GameController.JoinGame(JoinRequest request, Guid joinKey) in E:\projects\entry\internship-entry-task\src\InternshipEntryTask.Api\Controllers\v1\GameController.cs:line 64
+   at lambda_method5(Closure, Object)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.AwaitableObjectResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|7_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddlewareImpl.<Invoke>g__Awaited|10_0(ExceptionHandlerMiddlewareImpl middleware, HttpContext context, Task task)
+2025-07-17 11:41:26.045 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5205/v1/games/join - 404 null application/problem+json 7957.0141ms
+2025-07-17 11:43:39.096 +03:00 [INF] Now listening on: https://localhost:7071
+2025-07-17 11:43:39.116 +03:00 [INF] Now listening on: http://localhost:5205
+2025-07-17 11:43:39.185 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-07-17 11:43:39.186 +03:00 [INF] Hosting environment: Development
+2025-07-17 11:43:39.187 +03:00 [INF] Content root path: E:\projects\entry\internship-entry-task\src\InternshipEntryTask.Api
+2025-07-17 12:23:21.946 +03:00 [INF] Now listening on: https://localhost:7071
+2025-07-17 12:23:22.030 +03:00 [INF] Now listening on: http://localhost:5205
+2025-07-17 12:23:22.175 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-07-17 12:23:22.204 +03:00 [INF] Hosting environment: Development
+2025-07-17 12:23:22.230 +03:00 [INF] Content root path: E:\projects\entry\internship-entry-task\src\InternshipEntryTask.Api
+2025-07-17 12:27:21.003 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5205/v1/games - null 0
+2025-07-17 12:27:21.204 +03:00 [INF] Executing endpoint 'InternshipEntryTask.Api.Controllers.v1.GameController.CreateGame (InternshipEntryTask.Api)'
+2025-07-17 12:27:21.220 +03:00 [INF] Route matched with {action = "CreateGame", controller = "Game"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Http.IResult] CreateGame() on controller InternshipEntryTask.Api.Controllers.v1.GameController (InternshipEntryTask.Api).
+2025-07-17 12:27:24.126 +03:00 [INF] Executed DbCommand (80ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = Guid), @p2='?' (DbType = Int32), @p3='?' (DbType = Guid), @p4='?' (DbType = Int32), @p5='?' (DbType = Int32), @p6='?' (DbType = Int32), @p7='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO games (anonymous_player_o_id, anonymous_player_x_id, height, join_key, next_move, status, width, "Winner")
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7)
+RETURNING id;
+2025-07-17 12:27:24.197 +03:00 [INF] Setting HTTP status code 200.
+2025-07-17 12:27:24.230 +03:00 [INF] Writing value of type 'GameDto' as Json.
+2025-07-17 12:27:24.250 +03:00 [INF] Executed action InternshipEntryTask.Api.Controllers.v1.GameController.CreateGame (InternshipEntryTask.Api) in 3024.4354ms
+2025-07-17 12:27:24.253 +03:00 [INF] Executed endpoint 'InternshipEntryTask.Api.Controllers.v1.GameController.CreateGame (InternshipEntryTask.Api)'
+2025-07-17 12:27:24.264 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5205/v1/games - 200 null application/json; charset=utf-8 3266.1131ms
+2025-07-17 12:27:36.013 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5205/v1/games/join - application/json 25
+2025-07-17 12:27:36.057 +03:00 [INF] Executing endpoint 'InternshipEntryTask.Api.Controllers.v1.GameController.JoinGame (InternshipEntryTask.Api)'
+2025-07-17 12:27:36.067 +03:00 [INF] Route matched with {action = "JoinGame", controller = "Game"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Http.IResult] JoinGame(InternshipEntryTask.Core.Data.Game.JoinRequest, System.Guid) on controller InternshipEntryTask.Api.Controllers.v1.GameController (InternshipEntryTask.Api).
+2025-07-17 12:27:36.435 +03:00 [INF] Executed DbCommand (3ms) [Parameters=[@__joinKey_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT g.id, g.anonymous_player_o_id, g.anonymous_player_x_id, g.height, g.join_key, g.next_move, g.status, g.width, g."Winner"
+FROM games AS g
+WHERE g.join_key = @__joinKey_0
+LIMIT 1
+2025-07-17 12:27:36.466 +03:00 [INF] Executed DbCommand (8ms) [Parameters=[@p8='?' (DbType = Int64), @p0='?' (DbType = Guid), @p1='?' (DbType = Guid), @p2='?' (DbType = Int32), @p3='?' (DbType = Guid), @p4='?' (DbType = Int32), @p5='?' (DbType = Int32), @p6='?' (DbType = Int32), @p7='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+UPDATE games SET anonymous_player_o_id = @p0, anonymous_player_x_id = @p1, height = @p2, join_key = @p3, next_move = @p4, status = @p5, width = @p6, "Winner" = @p7
+WHERE id = @p8;
+2025-07-17 12:27:36.470 +03:00 [INF] Setting HTTP status code 200.
+2025-07-17 12:27:36.471 +03:00 [INF] Writing value of type 'GameDto' as Json.
+2025-07-17 12:27:36.473 +03:00 [INF] Executed action InternshipEntryTask.Api.Controllers.v1.GameController.JoinGame (InternshipEntryTask.Api) in 404.9028ms
+2025-07-17 12:27:36.474 +03:00 [INF] Executed endpoint 'InternshipEntryTask.Api.Controllers.v1.GameController.JoinGame (InternshipEntryTask.Api)'
+2025-07-17 12:27:36.476 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5205/v1/games/join - 200 null application/json; charset=utf-8 462.3777ms
+2025-07-17 12:27:40.681 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5205/v1/games/join - application/json 25
+2025-07-17 12:27:40.689 +03:00 [INF] Executing endpoint 'InternshipEntryTask.Api.Controllers.v1.GameController.JoinGame (InternshipEntryTask.Api)'
+2025-07-17 12:27:40.692 +03:00 [INF] Route matched with {action = "JoinGame", controller = "Game"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Http.IResult] JoinGame(InternshipEntryTask.Core.Data.Game.JoinRequest, System.Guid) on controller InternshipEntryTask.Api.Controllers.v1.GameController (InternshipEntryTask.Api).
+2025-07-17 12:27:40.720 +03:00 [INF] Executed DbCommand (1ms) [Parameters=[@__joinKey_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT g.id, g.anonymous_player_o_id, g.anonymous_player_x_id, g.height, g.join_key, g.next_move, g.status, g.width, g."Winner"
+FROM games AS g
+WHERE g.join_key = @__joinKey_0
+LIMIT 1
+2025-07-17 12:28:12.945 +03:00 [INF] Executed action InternshipEntryTask.Api.Controllers.v1.GameController.JoinGame (InternshipEntryTask.Api) in 32248.1333ms
+2025-07-17 12:28:12.949 +03:00 [INF] Executed endpoint 'InternshipEntryTask.Api.Controllers.v1.GameController.JoinGame (InternshipEntryTask.Api)'
+2025-07-17 12:28:12.952 +03:00 [ERR] An unhandled exception has occurred while executing the request.
+InternshipEntryTask.Abstractions.Exceptions.ConflictException: Игрок Х уже существует
+   at InternshipEntryTask.Core.Services.GameService.JoinGameAsync(JoinRequest request, Guid joinKey) in E:\projects\entry\internship-entry-task\src\InternshipEntryTask.Core\Services\GameService.cs:line 77
+   at InternshipEntryTask.Api.Controllers.v1.GameController.JoinGame(JoinRequest request, Guid joinKey) in E:\projects\entry\internship-entry-task\src\InternshipEntryTask.Api\Controllers\v1\GameController.cs:line 64
+   at lambda_method126(Closure, Object)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.AwaitableObjectResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|7_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddlewareImpl.<Invoke>g__Awaited|10_0(ExceptionHandlerMiddlewareImpl middleware, HttpContext context, Task task)
+2025-07-17 12:28:14.671 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5205/v1/games/join - 409 null application/problem+json 33990.4728ms
+2025-07-17 12:28:19.581 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5205/v1/games - null 0
+2025-07-17 12:28:19.584 +03:00 [INF] Executing endpoint 'InternshipEntryTask.Api.Controllers.v1.GameController.CreateGame (InternshipEntryTask.Api)'
+2025-07-17 12:28:19.585 +03:00 [INF] Route matched with {action = "CreateGame", controller = "Game"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Http.IResult] CreateGame() on controller InternshipEntryTask.Api.Controllers.v1.GameController (InternshipEntryTask.Api).
+2025-07-17 12:28:19.595 +03:00 [INF] Executed DbCommand (4ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = Guid), @p2='?' (DbType = Int32), @p3='?' (DbType = Guid), @p4='?' (DbType = Int32), @p5='?' (DbType = Int32), @p6='?' (DbType = Int32), @p7='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO games (anonymous_player_o_id, anonymous_player_x_id, height, join_key, next_move, status, width, "Winner")
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7)
+RETURNING id;
+2025-07-17 12:28:19.599 +03:00 [INF] Setting HTTP status code 200.
+2025-07-17 12:28:19.600 +03:00 [INF] Writing value of type 'GameDto' as Json.
+2025-07-17 12:28:19.601 +03:00 [INF] Executed action InternshipEntryTask.Api.Controllers.v1.GameController.CreateGame (InternshipEntryTask.Api) in 13.5015ms
+2025-07-17 12:28:19.602 +03:00 [INF] Executed endpoint 'InternshipEntryTask.Api.Controllers.v1.GameController.CreateGame (InternshipEntryTask.Api)'
+2025-07-17 12:28:19.603 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5205/v1/games - 200 null application/json; charset=utf-8 22.5277ms
+2025-07-17 12:28:21.232 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5205/v1/games - null 0
+2025-07-17 12:28:21.237 +03:00 [INF] Executing endpoint 'InternshipEntryTask.Api.Controllers.v1.GameController.CreateGame (InternshipEntryTask.Api)'
+2025-07-17 12:28:21.239 +03:00 [INF] Route matched with {action = "CreateGame", controller = "Game"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Http.IResult] CreateGame() on controller InternshipEntryTask.Api.Controllers.v1.GameController (InternshipEntryTask.Api).
+2025-07-17 12:28:21.247 +03:00 [INF] Executed DbCommand (3ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = Guid), @p2='?' (DbType = Int32), @p3='?' (DbType = Guid), @p4='?' (DbType = Int32), @p5='?' (DbType = Int32), @p6='?' (DbType = Int32), @p7='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO games (anonymous_player_o_id, anonymous_player_x_id, height, join_key, next_move, status, width, "Winner")
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7)
+RETURNING id;
+2025-07-17 12:28:21.250 +03:00 [INF] Setting HTTP status code 200.
+2025-07-17 12:28:21.251 +03:00 [INF] Writing value of type 'GameDto' as Json.
+2025-07-17 12:28:21.252 +03:00 [INF] Executed action InternshipEntryTask.Api.Controllers.v1.GameController.CreateGame (InternshipEntryTask.Api) in 10.9666ms
+2025-07-17 12:28:21.253 +03:00 [INF] Executed endpoint 'InternshipEntryTask.Api.Controllers.v1.GameController.CreateGame (InternshipEntryTask.Api)'
+2025-07-17 12:28:21.254 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5205/v1/games - 200 null application/json; charset=utf-8 21.7698ms
+2025-07-17 12:28:31.653 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5205/v1/games/join - application/json 25
+2025-07-17 12:28:31.655 +03:00 [INF] Executing endpoint 'InternshipEntryTask.Api.Controllers.v1.GameController.JoinGame (InternshipEntryTask.Api)'
+2025-07-17 12:28:31.657 +03:00 [INF] Route matched with {action = "JoinGame", controller = "Game"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Http.IResult] JoinGame(InternshipEntryTask.Core.Data.Game.JoinRequest, System.Guid) on controller InternshipEntryTask.Api.Controllers.v1.GameController (InternshipEntryTask.Api).

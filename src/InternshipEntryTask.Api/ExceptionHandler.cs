@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
+using System.Net.Mime;
 
 namespace InternshipEntryTask.Api;
 
@@ -19,7 +20,9 @@ public class ExceptionHandler(IProblemDetailsService problemDetailsService) : IE
     {
         var problemDetails = new ProblemDetails()
         {
+            Title = nameof(Results.InternalServerError),
             Detail = exception.Message,
+            Status = StatusCodes.Status500InternalServerError,
         };
 
         if (exception is EntityNotFoundException)
@@ -41,11 +44,6 @@ public class ExceptionHandler(IProblemDetailsService problemDetailsService) : IE
         {
             problemDetails.Title = nameof(Results.UnprocessableEntity);
             problemDetails.Status = StatusCodes.Status422UnprocessableEntity;
-        }
-        else
-        {
-            problemDetails.Title = nameof(Results.InternalServerError);
-            problemDetails.Status = StatusCodes.Status500InternalServerError;
         }
 
         if (problemDetails is { Status: not null })

@@ -56,6 +56,7 @@ services:
       - GameSettings__Width=3
       - GameSettings__WinLength=3
       - GameSettings__Chance=10
+      - GameSettings__ChanceTurnNumber=3
     depends_on:
       migration-runner:
         condition: service_completed_successfully

@@ -53,11 +53,6 @@ public class GameModel : IDatabaseModel
     public Guid JoinKey { get; set; }
 
     /// <summary>
-    /// Хеш последнего хода
-    /// </summary>
-    public string? LastMoveHash { get; set; }
-
-    /// <summary>
     /// Навигационное поле
     /// </summary>
     public virtual ICollection<MoveModel> Moves { get; set; } = [];

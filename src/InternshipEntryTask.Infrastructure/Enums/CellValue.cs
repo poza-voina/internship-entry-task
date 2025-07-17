@@ -6,12 +6,11 @@
 public enum CellValue
 {
     /// <summary>
-    /// X
-    /// </summary>
-    X,
-
-    /// <summary>
     /// O
     /// </summary>
     O,
+    /// <summary>
+    /// X
+    /// </summary>
+    X,
 }
