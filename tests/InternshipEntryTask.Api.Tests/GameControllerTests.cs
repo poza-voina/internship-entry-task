@@ -1,4 +1,5 @@
 ﻿using FluentAssertions;
+using InternshipEntryTask.Abstractions.Constants;
 using InternshipEntryTask.Api.IntegrationTests;
 using InternshipEntryTask.Api.IntegrationTests.Base;
 using InternshipEntryTask.Api.Tests.Base;
@@ -17,8 +18,6 @@ public class GameControllerTests(PostgreSqlFixture fixture) : ControllerTestsBas
     private const string PATH_TO_GAME_FORMAT = PATH_TO_GAMES + "/{0}";
     private const string PATH_TO_GAME_JOIN = PATH_TO_GAMES + "/join";
     private const string PATH_TO_GAME_MOVE_FORMAT = PATH_TO_GAMES + "/{0}/move";
-    private const string ACCESS_KEY_HEADER_KEY = "X-Access-Key";
-    private const string JOIN_KEY_HEADER_KEY = "X-Join-Key";
 
     private IsolatedClientOptions DefaultIsolatedClientOptions { get; } = new() { ContainerFixture = fixture, PathToEnvironment = "TestConfigs/appsettings.test.json" };
 
@@ -132,12 +131,12 @@ public class GameControllerTests(PostgreSqlFixture fixture) : ControllerTestsBas
 
         var joinRequestFirstPlayer = new HttpRequestBuilder(HttpMethod.Post, PATH_TO_GAME_JOIN)
             .WithJsonContent(new JoinRequest { PlayerSymbol = CellValue.X })
-            .WithHeader(JOIN_KEY_HEADER_KEY, joinkey)
+            .WithHeader(HeadersKeysConstants.JOIN_KEY, joinkey)
             .Build();
 
         var joinRequestSecondPlayer = new HttpRequestBuilder(HttpMethod.Post, PATH_TO_GAME_JOIN)
             .WithJsonContent(new JoinRequest { PlayerSymbol = CellValue.O })
-            .WithHeader(JOIN_KEY_HEADER_KEY, joinkey)
+            .WithHeader(HeadersKeysConstants.JOIN_KEY, joinkey)
             .Build();
 
         // Act
@@ -198,12 +197,12 @@ public class GameControllerTests(PostgreSqlFixture fixture) : ControllerTestsBas
 
         var joinRequestFirstPlayer = new HttpRequestBuilder(HttpMethod.Post, PATH_TO_GAME_JOIN)
             .WithJsonContent(new JoinRequest { PlayerSymbol = CellValue.X })
-            .WithHeader(JOIN_KEY_HEADER_KEY, joinkey)
+            .WithHeader(HeadersKeysConstants.JOIN_KEY, joinkey)
             .Build();
 
         var joinRequestSecondPlayer = new HttpRequestBuilder(HttpMethod.Post, PATH_TO_GAME_JOIN)
             .WithJsonContent(new JoinRequest { PlayerSymbol = CellValue.X })
-            .WithHeader(JOIN_KEY_HEADER_KEY, joinkey)
+            .WithHeader(HeadersKeysConstants.JOIN_KEY, joinkey)
             .Build();
 
         // Act
@@ -236,7 +235,7 @@ public class GameControllerTests(PostgreSqlFixture fixture) : ControllerTestsBas
 
         var joinRequest = new HttpRequestBuilder(HttpMethod.Post, PATH_TO_GAME_JOIN)
             .WithJsonContent(new JoinRequest { PlayerSymbol = CellValue.X })
-            .WithHeader(JOIN_KEY_HEADER_KEY, joinkey)
+            .WithHeader(HeadersKeysConstants.JOIN_KEY, joinkey)
             .Build();
 
         var joinResponse = await client.SendAsync(joinRequest);
@@ -246,7 +245,7 @@ public class GameControllerTests(PostgreSqlFixture fixture) : ControllerTestsBas
         var requests = incorrectMoves.Select(x =>
             new HttpRequestBuilder(HttpMethod.Post, string.Format(PATH_TO_GAME_MOVE_FORMAT, 1))
                 .WithJsonContent(x)
-                .WithHeader(ACCESS_KEY_HEADER_KEY, accessKey)
+                .WithHeader(HeadersKeysConstants.ACCESS_KEY, accessKey)
                 .Build()
         ).ToList();
 
@@ -284,12 +283,12 @@ public class GameControllerTests(PostgreSqlFixture fixture) : ControllerTestsBas
 
         var joinRequestFirstPlayer = new HttpRequestBuilder(HttpMethod.Post, PATH_TO_GAME_JOIN)
             .WithJsonContent(new JoinRequest { PlayerSymbol = CellValue.X })
-            .WithHeader(JOIN_KEY_HEADER_KEY, joinkey)
+            .WithHeader(HeadersKeysConstants.JOIN_KEY, joinkey)
             .Build();
 
         var joinRequestSecondPlayer = new HttpRequestBuilder(HttpMethod.Post, PATH_TO_GAME_JOIN)
             .WithJsonContent(new JoinRequest { PlayerSymbol = CellValue.O })
-            .WithHeader(JOIN_KEY_HEADER_KEY, joinkey)
+            .WithHeader(HeadersKeysConstants.JOIN_KEY, joinkey)
             .Build();
 
         var firstJoinGameResponse = await client.SendAsync(joinRequestFirstPlayer);
@@ -304,7 +303,7 @@ public class GameControllerTests(PostgreSqlFixture fixture) : ControllerTestsBas
         var requests = moves.Select((move, index) =>
             new HttpRequestBuilder(HttpMethod.Post, string.Format(PATH_TO_GAME_MOVE_FORMAT, 1))
                 .WithJsonContent(move)
-                .WithHeader(ACCESS_KEY_HEADER_KEY, accessKeys[index % accessKeys.Length])
+                .WithHeader(HeadersKeysConstants.ACCESS_KEY, accessKeys[index % accessKeys.Length])
                 .Build()
         ).ToList();
 
