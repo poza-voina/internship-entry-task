@@ -7,7 +7,28 @@
 1. Играют два игрока
 2. Каждый третий ход существует вероятность 10%, что поставленный игроком символ будет заменён на символ противника
 
-# Сценарий использования
+## Запуск
+```
+docker compose up -d --build
+```
+
+**Работающее приложение:** http://localhost:8080/swagger/index.html
+
+**Запуск тестов:** 
+```
+dotnet test
+```
+
+**Запуск тестов с отчетом:**
+```
+dotnet test --collect:"XPlat Code Coverage"
+```
+
+```
+reportgenerator -reports:"**/coverage.cobertura.xml" -targetdir:"coveragereport"
+```
+
+## Сценарий использования
 [Описание API](docs/api.md)
 
 Создать игру:
